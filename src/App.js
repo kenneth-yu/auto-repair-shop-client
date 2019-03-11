@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import {connect} from 'react-redux'
+import {vinTextChanger} from './Redux/actions'
 
 class App extends Component {
   state = {
@@ -13,6 +15,7 @@ class App extends Component {
   }
 
   changeHandler = (event) => {
+    this.props.vinTextChanger(event.target.value)
     this.setState({
       vinInputBox: event.target.value
     })
@@ -56,8 +59,7 @@ class App extends Component {
       <div className="App">
         <input type="text" name="vin" onChange={this.changeHandler} value={this.state.vinInputBox}/>
         <input type="button" name="vin-submit" onClick={this.submitHandler} value="Submit"/>
-        <span className="pseudolink" onClick={this.clickHandler}>Manually Insert</span><br/>
-        {this.state.badVin ? " Invalid VIN Number! Please Try Again!" : null}<br/>
+        {this.state.badVin ? " Invalid VIN Number! Please Try Again or Use Manual Insertion!" : null}<br/>
         <span>Year: {this.state.year}</span>
         {this.state.manualInsert ? <input type="text" name="year"/> : null}<br/>
         <span>Make: {this.state.make}</span>
@@ -65,10 +67,23 @@ class App extends Component {
         <span>Model: {this.state.model}</span>
         {this.state.manualInsert ? <input type="text" name="model"/> : null}<br/>
         <span>Transmission: {this.state.transmission}</span>
-        {this.state.manualInsert ? <input type="text" name="transmission"/> : null}
+        {this.state.manualInsert ? <input type="text" name="transmission"/> : null}<br/><br/>
+        <span className="pseudolink" onClick={this.clickHandler}>Manual Insertion</span><br/>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    badVin: state.badVin,
+    manualInsert: state.manualInsert,
+  }
+}
+//
+// const mapDispatchToProps = (dispatch) => {
+//   return{
+//     vinTextChange:(text) => dispatch(vinTextChanger)
+//   }
+// }
+export default connect(mapStateToProps, {vinTextChanger})(App);
