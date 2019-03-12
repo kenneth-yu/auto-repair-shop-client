@@ -9,8 +9,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type){
 
-    case "CHANGE_TEXT_VALUE":
-      console.log(action.payload)
+    // case "CHANGE_TEXT_VALUE":
+    //   console.log(action.payload)
       // return vinInputBox: action.payload
 
     default:

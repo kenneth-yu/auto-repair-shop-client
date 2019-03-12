@@ -1,80 +1,40 @@
 import React, { Component } from 'react';
+import VinChecker from './components/VinChecker'
+import Login from './components/Login'
+import Dashboard from './containers/Dashboard'
+import { Route, Switch } from "react-router-dom";
 import './App.css';
 import {connect} from 'react-redux'
-import {vinTextChanger} from './Redux/actions'
+import { withRouter } from 'react-router';
 
 class App extends Component {
   state = {
-    vinInputBox: "",
-    badVin: false,
-    manualInsert: false,
-    year:"",
-    make: "",
-    model: "",
-    transmission: ""
+    authenticated: false
   }
 
-  changeHandler = (event) => {
-    this.props.vinTextChanger(event.target.value)
+  authenticateUser = () =>{
     this.setState({
-      vinInputBox: event.target.value
+      authenticated: true
     })
-  }
-
-  submitHandler = () => {
-    let vin = this.state.vinInputBox
-    fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`)
-    .then(res => res.json())
-    .then(carData =>{
-      console.log(carData)
-      if (carData.Results[8].Value !== null || carData.Results[5].Value !== null || carData.Results[7].Value !== null){
-        this.setState({
-          badVin: false,
-          year: carData.Results[8].Value,
-          make: carData.Results[5].Value,
-          model: carData.Results[7].Value,
-          transmission: carData.Results[45].Value
-        })
-      }
-      else{
-        this.setState({
-          badVin: true
-        })
-      }}).catch(error => this.setState({
-      badVin: true
-    }))
-  }
-
-  clickHandler = () => {
-    this.setState({
-      manualInsert: !this.state.manualInsert
-    })
+    this.props.history.push("/dashboard");
   }
 
   render() {
-    // Prelude - JHMBB61461C004723
-    // Integra - JH4DA345XKS022633
-    // Supra - JT2JA81L4S0031188
     return (
       <div className="App">
-        <input type="text" name="vin" onChange={this.changeHandler} value={this.state.vinInputBox}/>
-        <input type="button" name="vin-submit" onClick={this.submitHandler} value="Submit"/>
-        {this.state.badVin ? " Invalid VIN Number! Please Try Again or Use Manual Insertion!" : null}<br/>
-        <span>Year: {this.state.year}</span>
-        {this.state.manualInsert ? <input type="text" name="year"/> : null}<br/>
-        <span>Make: {this.state.make}</span>
-        {this.state.manualInsert ? <input type="text" name="make"/> : null}<br/>
-        <span>Model: {this.state.model}</span>
-        {this.state.manualInsert ? <input type="text" name="model"/> : null}<br/>
-        <span>Transmission: {this.state.transmission}</span>
-        {this.state.manualInsert ? <input type="text" name="transmission"/> : null}<br/><br/>
-        <span className="pseudolink" onClick={this.clickHandler}>Manual Insertion</span><br/>
+
+      <Switch>
+        <Route path="/dashboard" component={Dashboard}/>
+        <Route path="/" render={(props) => <Login authenticate={this.authenticateUser} />}/>
+      </Switch>
+
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
+  // console.log(state)
   return {
     badVin: state.badVin,
     manualInsert: state.manualInsert,
@@ -86,4 +46,4 @@ const mapStateToProps = (state) => {
 //     vinTextChange:(text) => dispatch(vinTextChanger)
 //   }
 // }
-export default connect(mapStateToProps, {vinTextChanger})(App);
+export default connect(mapStateToProps)(withRouter(App));
