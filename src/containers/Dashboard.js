@@ -4,6 +4,7 @@ import SidebarContainer from './SidebarContainer'
 import VinChecker from '../components/VinChecker'
 
 class Dashboard extends React.Component{
+
   render(){
     return(
       <div>

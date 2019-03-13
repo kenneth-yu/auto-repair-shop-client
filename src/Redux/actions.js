@@ -4,3 +4,6 @@ export const vinTextChanger = (text) => {
     payload:text
   }
 }
+
+
+const authenticateUser = () => {}
