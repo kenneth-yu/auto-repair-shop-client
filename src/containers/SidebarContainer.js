@@ -1,11 +1,17 @@
 import React from "react";
+import {connect} from 'react-redux'
 import { slide as Menu } from 'react-burger-menu'
+import { Redirect } from 'react-router-dom'
 
 class SidebarContainer extends React.Component {
   showSettings (event) {
     event.preventDefault();
 
   }
+
+  // newCustomerRedirect = () => {
+  //
+  // }
 
   render () {
     return (
@@ -21,4 +27,5 @@ class SidebarContainer extends React.Component {
   }
 }
 
-export default SidebarContainer
+
+export default connect()(SidebarContainer)

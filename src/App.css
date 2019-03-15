@@ -79,4 +79,35 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .menu-item{
   color: white;
   padding: 10px;
+  font-weight: 900
+}
+.menu-item:hover{
+  color: #a90000;
+  padding: 10px;
+}
+
+.queue-card {
+  width: 600px;
+  padding: 10px;
+  border: 5px solid gray;
+  margin: auto;
+}
+
+.sort-btn{
+  font-size: 16px;
+  background-color: #e7e7e7;
+  color: black;
+}
+
+.login{
+  width: 600px;
+  padding: 10px;
+  border: 5px solid gray;
+  background-color: gray;
+  margin: auto;
+}
+
+.car-job-header{
+  font-weight: 900;
+  color:blue;
 }
