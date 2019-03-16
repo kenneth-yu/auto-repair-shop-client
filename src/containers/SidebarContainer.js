@@ -1,31 +1,67 @@
 import React from "react";
 import {connect} from 'react-redux'
 import { slide as Menu } from 'react-burger-menu'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter} from 'react-router-dom'
 
 class SidebarContainer extends React.Component {
-  showSettings (event) {
-    event.preventDefault();
-
+  componentDidMount(){
+    this.props.resetRedirectState()
   }
 
-  // newCustomerRedirect = () => {
-  //
-  // }
-
   render () {
+    let {dashboard, newCustomer, newCar, newJob} = this.props
+    if (dashboard){
+      if(!this.props.location.pathname !== "/dashboard"){
+          return <Redirect to="/dashboard"/>
+        }
+      }
+    else if (newCustomer){
+      if(this.props.location.pathname !== "/newcustomer"){
+        return <Redirect to="/newcustomer"/>
+      }
+    }
+    else if (newCar){
+      if(!this.props.location.pathname !== "/newcar"){
+        return <Redirect to="/newcar"/>
+      }
+    }
+    else if (newJob){
+      if(!this.props.location.pathname !== "/newjob"){
+        return <Redirect to="/newjob"/>
+      }
+    }
+
+
     return (
       <Menu width={'22%'}>
-        <span className="menu-item">Add New Customer</span>
-        <span className="menu-item">Add New Car</span>
-        <span className="menu-item">Add New Job</span>
-        <span className="menu-item">Search Customers</span>
-        <span className="menu-item">Search Cars</span>
-        <span className="menu-item">Search Job History</span>
+        <span className="menu-item" id="dashboard"  onClick={(event) => this.props.setRedirectState(event.target.id)}>Dashboard</span>
+        <span className="menu-item" id="newCustomer" onClick={(event) => this.props.setRedirectState(event.target.id)}>Add New Customer</span>
+        <span className="menu-item" id="newCar" onClick={(event) => this.props.setRedirectState(event.target.id)}>Add New Car</span>
+        <span className="menu-item" id="newJob" onClick={(event) => this.props.setRedirectState(event.target.id)}>Add New Job</span>
+        <span className="menu-item" id="searchCustomer" onClick={(event) => this.props.setRedirectState(event.target.id)}>Search Customers</span>
+        <span className="menu-item" id="searchCar" onClick={(event) => this.props.setRedirectState(event.target.id)}>Search Cars</span>
+        <span className="menu-item" id="searchJob" onClick={(event) => this.props.setRedirectState(event.target.id)}>Search Job History</span>
       </Menu>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return{
+    dashboard: state.reducer.dashboard,
+    newCustomer: state.reducer.newCustomer,
+    newCar: state.reducer.newCar,
+    newJob: state.reducer.newJob
+  }
+}
 
-export default connect()(SidebarContainer)
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    // authenticateUser: (username, password) => dispatch(authenticateUser(username, password))
+    setRedirectState: (clickedSpan) => dispatch({type: "SET_REDIRECT_STATE", payload: clickedSpan}),
+    resetRedirectState: (clickedSpan) => dispatch({type: "RESET_REDIRECT_STATE", payload: clickedSpan})
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SidebarContainer))

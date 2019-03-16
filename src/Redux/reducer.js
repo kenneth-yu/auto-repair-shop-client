@@ -5,7 +5,11 @@ const initialState = {
   currentUser: {},
   allJobs: [],
   allCustomers: [],
-  allCars:[]
+  allCars:[],
+  dashboard: false,
+  newCustomer: false,
+  newCar: false,
+  newJob: false
 }
 
 
@@ -32,6 +36,17 @@ export default function reducer(state = initialState, action) {
 
     case "POST_NEW_CARS":
       return {...state, allCars: [...state.allCars, action.payload]}
+
+    case "SET_REDIRECT_STATE":
+      // console.log(action.payload)
+      return {...state, [action.payload]:true }
+
+    case "RESET_REDIRECT_STATE":
+      return{...state,
+        dashboard: false,
+        newCustomer: false,
+        newCar: false,
+        newJob: false }
 
     default:
       return state

@@ -5,6 +5,7 @@ import Dashboard from './containers/Dashboard'
 import NewCustomer from './components/NewCustomer'
 import NewJob from './components/NewJob'
 import NewCarContainer from './containers/NewCarContainer'
+import SidebarContainer from './containers/SidebarContainer'
 // import Forbidden from './componenets/Forbidden'
 import { Route, Switch } from "react-router-dom";
 import './App.css';

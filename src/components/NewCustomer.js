@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addNewCustomer} from '../Redux/actions'
+import SidebarContainer from '../containers/SidebarContainer'
+import { Redirect } from 'react-router-dom'
 
 class NewCustomer extends React.Component{
   state = {
@@ -16,8 +18,12 @@ class NewCustomer extends React.Component{
   }
 
   render(){
+    if (!localStorage.getItem('token')){
+      return <Redirect to="/login"/>
+    }
     return(
       <div>
+        <SidebarContainer/>
         Name: <input type="text" name="name" value={this.state.name} onChange={this.changeHandler}/><br/>
         Address: <input type="text" name="address" value={this.state.address} onChange={this.changeHandler}/><br/>
         DOB: <input type="text" name="dob" value={this.state.dob} onChange={this.changeHandler}/><br/>
