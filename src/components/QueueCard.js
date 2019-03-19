@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getCars, getCustomers} from '../Redux/actions'
+import {getCars, getCustomers, toggleJobStatus} from '../Redux/actions'
 import moment from 'moment'
 
 class QueueCard extends React.Component{
@@ -26,7 +26,7 @@ class QueueCard extends React.Component{
           <h2>Time In: {!!relevantCar ? moment(jobDetails.created_at).format('lll') : null} </h2>
           <h2> Status: {!!relevantCar ? (jobDetails.status ? "Completed":"In Progress") : null}</h2>
           <h2>Owner: {!!relevantCustomer ? relevantCustomer.name :null}</h2>
-          <input type="button" name="finished" value="Mark Job as Completed"/>
+          <input onClick={() => this.props.toggleJobStatus(jobDetails)} type="button" name="finished" value="Mark Job as Completed"/>
         </div>
       )
     }
@@ -49,7 +49,8 @@ const mapDispatchToProps = (dispatch) =>{
   // console.log("dispatch")
   return{
     getCars: () => dispatch(getCars()),
-    getCustomers: () => dispatch(getCustomers())
+    getCustomers: () => dispatch(getCustomers()),
+    toggleJobStatus: (jobDetails) => dispatch(toggleJobStatus(jobDetails))
   }
 }
 

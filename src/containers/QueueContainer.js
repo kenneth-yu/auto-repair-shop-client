@@ -9,10 +9,15 @@ class QueueContainer extends React.Component{
   }
   render(){
     // console.log(this.props.allJobs)
-    let allJobList = this.props.allJobs.map(oneJob => <QueueCard key={oneJob.id} jobDetails={oneJob}/>)
+    if (this.props.allJobs.length > 0){
+      let allJobList = this.props.allJobs.map(oneJob => <QueueCard key={oneJob.id} jobDetails={oneJob}/>)
     return(
       allJobList
     )
+  }
+  else{
+    return null
+  }
   }
 }
 

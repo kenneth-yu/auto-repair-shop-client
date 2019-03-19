@@ -160,6 +160,79 @@ export function addNewCar(vin, year, make, model, color, customer){
   }
 }
 
+export function toggleJobStatus(jobDetails){
+  return (dispatch)=> {
+    console.log(jobDetails)
+    return fetch(`http://localhost:3000/api/v1/jobs/${jobDetails.id},`,{
+      method:'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.token}`
+      },
+      body:JSON.stringify({status: !jobDetails.status })
+    }).then(res => res.json())
+    .then(data => {
+      console.log(data)
+      dispatch({type: "TOGGLE_JOB_STATUS", payload:data})
+    })
+  }
+}
+
+export function updateCarDetails(id, vin, year, make, model, color){
+  let carDetails = {id: id, vin: vin, year: year, make: make, model: model, color: color}
+  return (dispatch)=> {
+          return fetch(`http://localhost:3000/api/v1/cars/${carDetails.id},`,{
+          method:'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.token}`
+          },
+          body:JSON.stringify({car: carDetails})
+        }).then(res => res.json())
+        .then(data => {
+          dispatch({type: "UPDATE_CAR_DETAILS", payload:data})
+        })
+  }
+}
+
+export function updateCustomerDetails(id, name, address, dob, balance){
+  let customerDetails = {id:id , name:name, address:address, dob:dob, balance:balance}
+  return (dispatch)=> {
+          return fetch(`http://localhost:3000/api/v1/customers/${customerDetails.id},`,{
+          method:'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.token}`
+          },
+          body:JSON.stringify({customer: customerDetails})
+        }).then(res => res.json())
+        .then(data => {
+          dispatch({type: "UPDATE_CUSTOMER_DETAILS", payload:data})
+        })
+  }
+}
+
+export function updateJobDetails(id, name, car, quote, status, notes){
+  let jobDetails = {id:id, name:name, car:car, quote:quote, status:status, notes:notes}
+  return (dispatch)=> {
+          return fetch(`http://localhost:3000/api/v1/jobs/${jobDetails.id},`,{
+          method:'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.token}`
+          },
+          body:JSON.stringify({job: jobDetails})
+        }).then(res => res.json())
+        .then(data => {
+          dispatch({type: "UPDATE_JOB_DETAILS", payload:data})
+        })
+  }
+}
+
 // export function vinAPI(vin){
 //   fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`)
 //   .then(res => res.json())

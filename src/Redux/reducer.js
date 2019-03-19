@@ -38,6 +38,50 @@ export default function reducer(state = initialState, action) {
     case "POST_NEW_CARS":
       return {...state, allCars: [...state.allCars, action.payload]}
 
+    case "TOGGLE_JOB_STATUS":
+      let jobArray = state.allJobs.map(oneCustomer => {
+        if(oneCustomer.id === action.payload.id){
+          return action.payload
+        }
+        else{
+          return oneCustomer
+        }
+      })
+      return {...state, allJobs: jobArray}
+
+    case "UPDATE_CAR_DETAILS":
+      let carArray = state.allCars.map(oneCar=>{
+        if(oneCar.id === action.payload.id){
+          return action.payload
+        }
+        else{
+          return oneCar
+        }
+      })
+      return {...state, allCars: carArray}
+
+      case "UPDATE_CUSTOMER_DETAILS":
+        let customerArray = state.allCustomers.map(oneCustomer=>{
+          if(oneCustomer.id === action.payload.id){
+            return action.payload
+          }
+          else{
+            return oneCustomer
+          }
+        })
+        return {...state, allCustomers: customerArray}
+
+        case "UPDATE_JOB_DETAILS":
+          let jobArrayList = state.allJobs.map(oneJob =>{
+            if(oneJob.id === action.payload.id){
+              return action.payload
+            }
+            else{
+              return oneJob
+            }
+          })
+          return {...state, allJobs: jobArrayList}
+
     case "SET_REDIRECT_STATE":
       // console.log(action.payload)
       return {...state, [action.payload]:true }

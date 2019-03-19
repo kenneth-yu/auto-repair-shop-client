@@ -36,7 +36,7 @@ class SidebarContainer extends React.Component {
       }
     }
     else if (searchCar){
-      if(!this.props.location.pathname !== "/cars"){
+      if(this.props.location.pathname !== "/cars"){
         return <Redirect to="/cars"/>
       }
     }
