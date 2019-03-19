@@ -1,12 +1,6 @@
 // import React from 'react';
 // import { Route, Redirect } from 'react-router-dom';
 
-export const vinTextChanger = (text) => {
-  return {
-    type:"CHANGE_TEXT_VALUE",
-    payload:text
-  }
-}
 
 export function authenticateUser(username, password) {
   return (dispatch) => {
@@ -119,23 +113,67 @@ export function addNewCustomer(name, address, dob){
       body:JSON.stringify({customer})
     })
     .then(res => res.json())
-    .then(data => dispatch({type: "POST_NEW_CUSTOMER", payload: data}))
+    .then(data => {
+      dispatch({type: "POST_NEW_CUSTOMER", payload: data})
+      window.alert("New Customer Added Successfully")
+    })
   }
 }
 
-export function addNewJob(quote, job_name, notes){
+export function addNewJob(user, car, quote, job_name, notes){
   return (dispatch)=> {
-    let addNewJob = {quote:quote, job_name:job_name, notes:notes}
-    return fetch(`http://localhost:3000/api/v1/customers`,{
+    let newJob = {user_id: user.id, car_id: car.id, quote:quote, job_name:job_name, notes:notes}
+    return fetch(`http://localhost:3000/api/v1/jobs`,{
       method:'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         Authorization: `Bearer ${localStorage.token}`
       },
-      body:JSON.stringify({addNewJob})
+      body:JSON.stringify({job: newJob})
     })
     .then(res => res.json())
-    .then(data => dispatch({type: "POST_NEW_CUSTOMER", payload: data}))
+    .then(data => {
+      dispatch({type: "POST_NEW_JOBS", payload: data})
+      window.alert("New Job Added Successfully")
+    })
   }
 }
+
+export function addNewCar(vin, year, make, model, color, customer){
+  return (dispatch)=> {
+    let newCar = {vin: vin, year: year, make: make, model:model, color:color, customer_id:customer.id}
+    return fetch(`http://localhost:3000/api/v1/cars`,{
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.token}`
+      },
+      body:JSON.stringify({car: newCar})
+    })
+    .then(res => res.json())
+    .then(data => {
+      dispatch({type: "POST_NEW_CAR", payload: data})
+      window.alert("New Car Added Successfully!")
+    })
+  }
+}
+
+// export function vinAPI(vin){
+//   fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`)
+//   .then(res => res.json())
+//   .then(carData =>{
+//
+//     if (carData.Results[8].Value !== null || carData.Results[5].Value !== null || carData.Results[7].Value !== null){
+//       dispatch({type: "CHECK_VIN_NUMBER", payload:carData})
+//
+//     }
+//     else{
+//       this.setState({
+//         badVin: true
+//       })
+//     }}).catch(error => this.setState({
+//     badVin: true
+//   }))
+// }

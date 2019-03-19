@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {vinTextChanger} from '../Redux/actions'
+import {addNewCar} from '../Redux/actions'
 
 class VinChecker extends React.Component{
   state = {
@@ -10,12 +10,12 @@ class VinChecker extends React.Component{
     year:"",
     make: "",
     model: "",
-    transmission: ""
+    color: ""
   }
 
   changeHandler = (event) => {
     this.setState({
-      vinInputBox: event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
@@ -24,7 +24,6 @@ class VinChecker extends React.Component{
     fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`)
     .then(res => res.json())
     .then(carData =>{
-      console.log(carData)
       if (carData.Results[8].Value !== null || carData.Results[5].Value !== null || carData.Results[7].Value !== null){
         this.setState({
           badVin: false,
@@ -36,10 +35,12 @@ class VinChecker extends React.Component{
       }
       else{
         this.setState({
-          badVin: true
+          badVin: true,
+          vinInputBox: ""
         })
       }}).catch(error => this.setState({
-      badVin: true
+      badVin: true,
+      vinInputBox: ""
     }))
   }
 
@@ -49,41 +50,39 @@ class VinChecker extends React.Component{
     })
   }
 
+  submitNewCar = (vin, year, make, model, color, customer) => {
+    this.props.addNewCar(vin, year, make, model, color, customer)
+  }
+
   render() {
     // Prelude - JHMBB61461C004723
     // Integra - JH4DA345XKS022633
     // Supra - JT2JA81L4S0031188
     return (
       <div className="App">
-        {!this.state.manualInsert ? <input type="text" name="vin" onChange={this.changeHandler} value={this.state.vinInputBox}/> : null}
-        {!this.state.manualInsert ? <input type="button" name="vin-submit" onClick={this.submitHandler} value="Submit"/> : null}
+        {!this.state.manualInsert ? <input type="text" name="vinInputBox" onChange={this.changeHandler} value={this.state.vinInputBox}/> : null}
+        {!this.state.manualInsert ? <input type="button" name="vin-submit" onClick={this.submitHandler} value="Search"/> : null}
         {this.state.badVin ? " Invalid VIN Number! Please Try Again or Use Manual Insertion!" : null}<br/>
-        <span>Year: {this.state.year}</span>
-        {this.state.manualInsert ? <input type="text" name="year"/> : null}<br/>
-        <span>Make: {this.state.make}</span>
-        {this.state.manualInsert ? <input type="text" name="make"/> : null}<br/>
-        <span>Model: {this.state.model}</span>
-        {this.state.manualInsert ? <input type="text" name="model"/> : null}<br/>
-        <span>Transmission: {this.state.transmission}</span>
-        {this.state.manualInsert ? <input type="text" name="transmission"/> : null}<br/>
-        {this.state.manualInsert ? <input type="button" name="submit" value="Submit"/> : null}<br/>
-        <span className="pseudolink" onClick={this.clickHandler}>Manual Insertion</span><br/>
+        Year: <input type="text" name="year" onChange={this.changeHandler} value={this.state.year}/><br/>
+        Make: <input type="text" name="make" onChange={this.changeHandler} value={this.state.make}/><br/>
+        Model: <input type="text" name="model" onChange={this.changeHandler} value={this.state.model}/><br/>
+        Color: <input type="text" name="color" onChange={this.changeHandler} value={this.state.color}/><br/>
+        <input type="button" name="submit" value="Submit New Car" onClick={() => this.submitNewCar(this.state.vinInputBox, this.state.year, this.state.make, this.state.model, this.state.color, this.props.selectedCustomer)}/>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  // console.log(state)
-  return {
-    badVin: state.badVin,
-    manualInsert: state.manualInsert,
-  }
-}
-//
-// const mapDispatchToProps = (dispatch) => {
-//   return{
-//     vinTextChange:(text) => dispatch(vinTextChanger)
+// const mapStateToProps = (state) => {
+//   // console.log(state)
+//   return {
+//     badVin: state.badVin,
 //   }
 // }
-export default connect(mapStateToProps, {vinTextChanger})(VinChecker);
+//
+const mapDispatchToProps = (dispatch) => {
+  return{
+    addNewCar:(vin, year, make, model, color, customer) => dispatch(addNewCar(vin, year, make, model, color, customer))
+  }
+}
+export default connect(null, mapDispatchToProps)(VinChecker);

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getCars, getCustomers} from '../Redux/actions'
+import moment from 'moment'
 
 class QueueCard extends React.Component{
   componentDidMount(){
@@ -18,15 +19,14 @@ class QueueCard extends React.Component{
     if (allCars.length !== 0  && allCustomers.length !== 0){
       let relevantCar = allCars.find(oneCar => oneCar.id === jobDetails.car_id)
       let relevantCustomer = allCustomers.find(oneCustomer => oneCustomer.id === relevantCar.customer_id)
-      // console.log(relevantCustomer)
-      // console.log(!!relevantCar)
-      // console.log(!!relevantCustomer)
       return(
         <div className="queue-card">
-        <h1 className="car-job-header">{!!relevantCar ? relevantCar.year+ " "+ relevantCar.make+ " " + relevantCar.model + " - " + jobDetails.job_name: null}</h1>
-        <h2>Time-In: 11:43 AM - Status: In Progress</h2>
-        <h2>Owner: {!!relevantCustomer ? relevantCustomer.name :null}</h2>
-        <input type="button" name="finished" value="Mark Job as Completed"/>
+          <h1 className="car-job-header">{!!relevantCar ? relevantCar.year+ " "+ relevantCar.make+ " " + relevantCar.model : null}</h1>
+          <h1 className="car-job-header">{!!relevantCar ? jobDetails.job_name : null}</h1>
+          <h2>Time In: {!!relevantCar ? moment(jobDetails.created_at).format('lll') : null} </h2>
+          <h2> Status: {!!relevantCar ? (jobDetails.status ? "Completed":"In Progress") : null}</h2>
+          <h2>Owner: {!!relevantCustomer ? relevantCustomer.name :null}</h2>
+          <input type="button" name="finished" value="Mark Job as Completed"/>
         </div>
       )
     }

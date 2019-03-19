@@ -84,6 +84,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .menu-item:hover{
   color: #a90000;
   padding: 10px;
+  cursor: pointer;
 }
 
 .queue-card {
@@ -110,4 +111,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .car-job-header{
   font-weight: 900;
   color:blue;
+}
+
+.drop-down{
+  width: 150px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin: auto;
 }

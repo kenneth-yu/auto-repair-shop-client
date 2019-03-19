@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import SidebarContainer from './SidebarContainer'
-import VinChecker from '../components/VinChecker'
+// import VinChecker from '../components/VinChecker'
 import QueueContainer from '../containers/QueueContainer'
 import SortButtons from '../components/SortButtons'
 import { Redirect } from 'react-router-dom'

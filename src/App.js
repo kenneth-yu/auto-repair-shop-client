@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import VinChecker from './components/VinChecker'
+// import VinChecker from './components/VinChecker'
 import Login from './components/Login'
 import Dashboard from './containers/Dashboard'
 import NewCustomer from './components/NewCustomer'
 import NewJob from './components/NewJob'
 import NewCarContainer from './containers/NewCarContainer'
-import SidebarContainer from './containers/SidebarContainer'
+import Customers from './containers/Customers'
+import Cars from './containers/Cars'
+import Jobs from './containers/Jobs'
+// import SidebarContainer from './containers/SidebarContainer'
 // import Forbidden from './componenets/Forbidden'
 import { Route, Switch } from "react-router-dom";
 import './App.css';
@@ -26,6 +29,9 @@ class App extends Component {
           <Route path="/newcustomer" component={NewCustomer}/>
           <Route path="/newcar" component={NewCarContainer}/>
           <Route path="/newjob" component={NewJob}/>
+          <Route path="/customers" component={Customers}/>
+          <Route path="/cars" component={Cars}/>
+          <Route path="/jobs" component={Jobs}/>
           <Route path="/" component={Login}/>
         </Switch>
       </div>

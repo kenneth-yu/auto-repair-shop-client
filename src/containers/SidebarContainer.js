@@ -9,9 +9,9 @@ class SidebarContainer extends React.Component {
   }
 
   render () {
-    let {dashboard, newCustomer, newCar, newJob} = this.props
+    let {dashboard, newCustomer, newCar, newJob, searchCustomer, searchCar, searchJob} = this.props
     if (dashboard){
-      if(!this.props.location.pathname !== "/dashboard"){
+      if(this.props.location.pathname !== "/dashboard"){
           return <Redirect to="/dashboard"/>
         }
       }
@@ -21,13 +21,28 @@ class SidebarContainer extends React.Component {
       }
     }
     else if (newCar){
-      if(!this.props.location.pathname !== "/newcar"){
+      if(this.props.location.pathname !== "/newcar"){
         return <Redirect to="/newcar"/>
       }
     }
     else if (newJob){
-      if(!this.props.location.pathname !== "/newjob"){
+      if(this.props.location.pathname !== "/newjob"){
         return <Redirect to="/newjob"/>
+      }
+    }
+    else if (searchCustomer){
+      if(this.props.location.pathname !== "/customers"){
+        return <Redirect to="/customers"/>
+      }
+    }
+    else if (searchCar){
+      if(!this.props.location.pathname !== "/cars"){
+        return <Redirect to="/cars"/>
+      }
+    }
+    else if (searchJob){
+      if(this.props.location.pathname !== "/jobs"){
+        return <Redirect to="/jobs"/>
       }
     }
 
@@ -51,7 +66,10 @@ const mapStateToProps = (state) => {
     dashboard: state.reducer.dashboard,
     newCustomer: state.reducer.newCustomer,
     newCar: state.reducer.newCar,
-    newJob: state.reducer.newJob
+    newJob: state.reducer.newJob,
+    searchCustomer: state.reducer.searchCustomer,
+    searchCar: state.reducer.searchCar,
+    searchJob: state.reducer.searchJob
   }
 }
 

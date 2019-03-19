@@ -1,7 +1,5 @@
 
 const initialState = {
-  badVin: false,
-  manualInsert: false,
   currentUser: {},
   allJobs: [],
   allCustomers: [],
@@ -9,7 +7,10 @@ const initialState = {
   dashboard: false,
   newCustomer: false,
   newCar: false,
-  newJob: false
+  newJob: false,
+  searchCustomer: false,
+  searchCar: false,
+  searchJob: false
 }
 
 
@@ -46,7 +47,10 @@ export default function reducer(state = initialState, action) {
         dashboard: false,
         newCustomer: false,
         newCar: false,
-        newJob: false }
+        newJob: false,
+        searchCustomer: false,
+        searchCar: false,
+        searchJob: false }
 
     default:
       return state
