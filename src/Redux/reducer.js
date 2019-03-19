@@ -60,27 +60,31 @@ export default function reducer(state = initialState, action) {
       })
       return {...state, allCars: carArray}
 
-      case "UPDATE_CUSTOMER_DETAILS":
-        let customerArray = state.allCustomers.map(oneCustomer=>{
-          if(oneCustomer.id === action.payload.id){
-            return action.payload
-          }
-          else{
-            return oneCustomer
-          }
-        })
-        return {...state, allCustomers: customerArray}
+  case "UPDATE_CUSTOMER_DETAILS":
+    let customerArray = state.allCustomers.map(oneCustomer=>{
+      if(oneCustomer.id === action.payload.id){
+        return action.payload
+      }
+      else{
+        return oneCustomer
+      }
+    })
+    return {...state, allCustomers: customerArray}
 
-        case "UPDATE_JOB_DETAILS":
-          let jobArrayList = state.allJobs.map(oneJob =>{
-            if(oneJob.id === action.payload.id){
-              return action.payload
-            }
-            else{
-              return oneJob
-            }
-          })
-          return {...state, allJobs: jobArrayList}
+    case "UPDATE_JOB_DETAILS":
+      let jobArrayList = state.allJobs.map(oneJob =>{
+        if(oneJob.id === action.payload.id){
+          return action.payload
+        }
+        else{
+          return oneJob
+        }
+      })
+      return {...state, allJobs: jobArrayList}
+
+    case "DELETE_JOB":
+      let jobList = state.allJobs.filter(oneJob => oneJob.id !== action.payload)
+      return {...state, allJobs: jobList}
 
     case "SET_REDIRECT_STATE":
       // console.log(action.payload)

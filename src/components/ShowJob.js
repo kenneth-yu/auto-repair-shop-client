@@ -2,11 +2,13 @@ import React from 'react'
 import SidebarContainer from '../containers/SidebarContainer'
 import {connect} from 'react-redux'
 import {updateJobDetails} from '../Redux/actions'
-import {getCars, getCustomers} from '../Redux/actions'
+import {getCars, getCustomers, deleteJobDetails} from '../Redux/actions'
+import { Redirect } from 'react-router-dom'
 
 class ShowJob extends React.Component{
   state = {
     edit: false,
+    redirect: false,
     job_name: this.props.job.job_name,
     car: this.props.job.car,
     quote: this.props.job.quote,
@@ -48,7 +50,12 @@ class ShowJob extends React.Component{
             this.setState({edit:!this.state.edit})
           }} value="Submit Edit"/>
         : null }
-        <input type="button" name="edit" onClick={this.toggleEdit} value="Edit Customer Details"/>
+        <input type="button" name="edit" onClick={this.toggleEdit} value="Edit Job Details"/>
+        <input type="button" name="delete" onClick={() => {
+          this.props.deleteJobDetails(this.props.job.id)
+          this.setState({redirect: !this.state.redirect})
+        }} value="Delete Job"/>
+        {this.state.redirect ? <Redirect to="/jobs"/> : null}
       </div>
     )
   }
@@ -61,7 +68,8 @@ class ShowJob extends React.Component{
 const mapDispatchToProps = (dispatch) => {
   return{
     updateJobDetails: (id, name, car, quote, status, notes) => dispatch(updateJobDetails(id, name, car, quote, status, notes)),
-    getCars: () => dispatch(getCars())
+    getCars: () => dispatch(getCars()),
+    deleteJobDetails: (id) => dispatch(deleteJobDetails(id))
   }
 }
 

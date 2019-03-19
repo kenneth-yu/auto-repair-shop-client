@@ -121,6 +121,8 @@ export function addNewCustomer(name, address, dob){
 }
 
 export function addNewJob(user, car, quote, job_name, notes){
+  console.log(user)
+  console.log(car)
   return (dispatch)=> {
     let newJob = {user_id: user.id, car_id: car.id, quote:quote, job_name:job_name, notes:notes}
     return fetch(`http://localhost:3000/api/v1/jobs`,{
@@ -135,7 +137,6 @@ export function addNewJob(user, car, quote, job_name, notes){
     .then(res => res.json())
     .then(data => {
       dispatch({type: "POST_NEW_JOBS", payload: data})
-      window.alert("New Job Added Successfully")
     })
   }
 }
@@ -229,6 +230,24 @@ export function updateJobDetails(id, name, car, quote, status, notes){
         }).then(res => res.json())
         .then(data => {
           dispatch({type: "UPDATE_JOB_DETAILS", payload:data})
+        })
+  }
+}
+
+export function deleteJobDetails(id){
+  let jobDetails = {id:id}
+  console.log(id)
+  return (dispatch)=> {
+          return fetch(`http://localhost:3000/api/v1/jobs/${jobDetails.id},`,{
+          method:'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.token}`
+          },
+        }).then(res => res.json())
+        .then(data => {
+          dispatch({type: "DELETE_JOB", payload:id})
         })
   }
 }

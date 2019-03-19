@@ -22,6 +22,7 @@ class NewJob extends React.Component{
   }
 
   customerValues = (values) => {
+    console.log(values)
     if (this.props.allCars.length > 0  && this.props.allCustomers.length > 0 && values.length > 0){
       let relevantCars = this.props.allCars.filter(oneCar => oneCar.customer_id === values[0].id)
       this.setState({
@@ -32,6 +33,7 @@ class NewJob extends React.Component{
   }
 
   setValues = (values) => {
+    console.log(values)
     if (this.props.allCars.length > 0  && this.props.allCustomers.length > 0){
       this.setState({
         selectedCar: values[0]
@@ -46,7 +48,6 @@ class NewJob extends React.Component{
   }
 
   render(){
-    //MISSING TWO DROP DOWN MENUS. ONE FOR CORRESPONDING CUSTOMER AND ONE FOR THEIR CARS.
     if (!localStorage.getItem('token')){
       return <Redirect to="/login"/>
     }
