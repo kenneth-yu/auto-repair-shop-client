@@ -121,10 +121,10 @@ export function addNewCustomer(name, address, dob){
 }
 
 export function addNewJob(user, car, quote, job_name, notes){
-  console.log(user)
-  console.log(car)
+  // console.log(user)
+  // console.log(car)
   return (dispatch)=> {
-    let newJob = {user_id: user.id, car_id: car.id, quote:quote, job_name:job_name, notes:notes}
+    let newJob = {user_id: user.id, car_id: car, quote:quote, job_name:job_name, notes:notes}
     return fetch(`http://localhost:3000/api/v1/jobs`,{
       method:'POST',
       headers: {
@@ -142,8 +142,9 @@ export function addNewJob(user, car, quote, job_name, notes){
 }
 
 export function addNewCar(vin, year, make, model, color, customer){
+  console.log(customer)
   return (dispatch)=> {
-    let newCar = {vin: vin, year: year, make: make, model:model, color:color, customer_id:customer.id}
+    let newCar = {vin: vin, year: year, make: make, model:model, color:color, customer_id:customer}
     return fetch(`http://localhost:3000/api/v1/cars`,{
       method:'POST',
       headers: {

@@ -16,6 +16,7 @@
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^4.0.8",
     "react-scripts": "2.1.8",
+    "react-select": "^2.4.2",
     "react-sidebar": "^3.0.2",
     "react-sidenav": "^3.1.7",
     "redux": "^4.0.1",

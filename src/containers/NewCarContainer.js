@@ -2,7 +2,8 @@ import React from 'react'
 import VinChecker from '../components/VinChecker'
 import SidebarContainer from './SidebarContainer'
 import { Redirect } from 'react-router-dom'
-import Select from "react-dropdown-select";
+// import Select from "react-dropdown-select";
+import Select from 'react-select'
 import {connect} from 'react-redux'
 import {getCustomers} from '../Redux/actions'
 
@@ -17,21 +18,22 @@ class NewCarContainer extends React.Component{
   }
 
   setValues = (values) => {
-    if (values.length > 0){
-      this.setState({selectedCustomer: values[0]})
-    }
+    this.setState({selectedCustomer: values.value})
   }
 
   render(){
     if (!localStorage.getItem('token')){
       return <Redirect to="/login"/>
     }
-    // console.log(this.props)
+    let options = this.props.allCustomers.map(oneCustomer => {
+      return {value: oneCustomer.id, label: oneCustomer.name}
+    })
+    console.log(this.state.selectedCustomer)
     return(
       <div>
       <SidebarContainer/>
         <div className="drop-down">
-          <Select labelField="name" options={this.props.allCustomers} onChange={(values) => this.setValues(values)} />
+          <Select labelField="name" options={options} onChange={(values) => this.setValues(values)} />
         </div>
         <VinChecker selectedCustomer={this.state.selectedCustomer}/>
       </div>

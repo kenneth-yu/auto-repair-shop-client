@@ -3,7 +3,9 @@ import {connect} from 'react-redux'
 import {addNewJob} from '../Redux/actions'
 import SidebarContainer from '../containers/SidebarContainer'
 import { Redirect } from 'react-router-dom'
-import Select from "react-dropdown-select";
+// import Select from "react-dropdown-select";
+import Select from 'react-select'
+
 import {getCars, getCustomers} from '../Redux/actions'
 
 class NewJob extends React.Component{
@@ -22,21 +24,24 @@ class NewJob extends React.Component{
   }
 
   customerValues = (values) => {
-    console.log(values)
-    if (this.props.allCars.length > 0  && this.props.allCustomers.length > 0 && values.length > 0){
-      let relevantCars = this.props.allCars.filter(oneCar => oneCar.customer_id === values[0].id)
+    console.log(values.value)
+    if (this.props.allCars.length > 0  && this.props.allCustomers.length > 0){
+      let relevantCars = this.props.allCars.filter(oneCar => oneCar.customer_id === values.value)
+      let relevantCarOptions = relevantCars.map(oneCar => {
+        return {value: oneCar.id, label: oneCar.year + " " + oneCar.make + " " + oneCar.model}
+      })
       this.setState({
-        relevantCars: relevantCars,
-        selectedCustomer: values[0]
+        relevantCars: relevantCarOptions,
+        selectedCustomer: values.value
       })
     }
   }
 
   setValues = (values) => {
-    console.log(values)
+    // console.log(values)
     if (this.props.allCars.length > 0  && this.props.allCustomers.length > 0){
       this.setState({
-        selectedCar: values[0]
+        selectedCar: values.value
       })
     }
   }
@@ -51,12 +56,15 @@ class NewJob extends React.Component{
     if (!localStorage.getItem('token')){
       return <Redirect to="/login"/>
     }
-    // console.log(this.props)
+    let options = this.props.allCustomers.map(oneCustomer => {
+      return {value: oneCustomer.id, label: oneCustomer.name}
+    })
+    // console.log(this.props.allCustomers)
     return(
       <div>
         <SidebarContainer/>
         <div className="drop-down">
-          <Select labelField="name" options={this.props.allCustomers} onChange={(values) => this.customerValues(values)} />
+          <Select labelField="name" options={options} onChange={(values) => this.customerValues(values)} />
           <Select labelField="model" options={this.state.relevantCars} onChange={(values) => this.setValues(values)} />
         </div>
         Job Name: <input type="text" name="job_name" value={this.state.name} onChange={this.changeHandler}/><br/>
