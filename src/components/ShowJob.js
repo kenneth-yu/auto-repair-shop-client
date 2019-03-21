@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {updateJobDetails} from '../Redux/actions'
 import {getCars, getCustomers, deleteJobDetails} from '../Redux/actions'
 import { Redirect } from 'react-router-dom'
+import {Card, Image, Button, Input} from 'semantic-ui-react'
 
 class ShowJob extends React.Component{
   state = {
@@ -39,23 +40,34 @@ class ShowJob extends React.Component{
     return(
       <div>
         <SidebarContainer/>
-        Job: <h2>{this.state.edit ? <input type="text" name="job_name" onChange={this.changeHandler} value={this.state.job_name}/> : this.props.job.job_name}</h2><br/>
-        Car: <h2>{this.state.edit ? <input type="text" name="car" onChange={this.changeHandler} value={this.state.car}/> : relevantCar.year + " "+ relevantCar.make + " "+ relevantCar.model}</h2><br/>
-        Quote: <h2>{this.state.edit ? <input type="text" name="quote" onChange={this.changeHandler} value={this.state.quote}/> :this.props.job.quote}</h2><br/>
-        Status: <h2>{this.state.edit ? <input type="text" name="status" onChange={this.changeHandler} value={this.state.status}/> :(this.props.job.status ? "Completed":"In Progress")}</h2><br/>
-        Notes: <h2>{this.state.edit ? <input type="text" name="notes" onChange={this.changeHandler} value={this.state.notes}/> : this.props.job.notes}</h2>
+        <Card centered>
+        <Image src="http://www.oogazone.com/wp-content/uploads/2018/07/top-10-businessman-counts-money-pop-art-avatar-character-vector-drawing.jpg"/>
+        <Card.Content>
+        <Card.Description>
+        Job: {this.state.edit ? <Input type="text" name="job_name" onChange={this.changeHandler} value={this.state.job_name}/> : this.props.job.job_name}<br/>
+        Car: {this.state.edit ? <Input type="text" name="car" onChange={this.changeHandler} value={this.state.car}/> : relevantCar.year + " "+ relevantCar.make + " "+ relevantCar.model}<br/>
+        Quote: {this.state.edit ? <Input type="text" name="quote" onChange={this.changeHandler} value={this.state.quote}/> :this.props.job.quote}<br/>
+        Status: {this.state.edit ? <Input type="text" name="status" onChange={this.changeHandler} value={this.state.status}/> :(this.props.job.status ? "Completed":"In Progress")}<br/>
+        Notes: {this.state.edit ? <Input type="text" name="notes" onChange={this.changeHandler} value={this.state.notes}/> : this.props.job.notes}
+        </Card.Description>
         {this.state.edit ?
-          <input type="button" name="submit" onClick={() => {
+          <Button type="button" name="submit" onClick={() => {
             this.props.updateJobDetails(this.props.job.id, this.state.job_name, this.state.car, this.state.quote, this.state.status, this.state.notes)
             this.setState({edit:!this.state.edit})
-          }} value="Submit Edit"/>
-        : null }
-        <input type="button" name="edit" onClick={this.toggleEdit} value="Edit Job Details"/>
-        <input type="button" name="delete" onClick={() => {
+          }} value="Submit Edit">Submit Edit</Button>
+        : null }<br/>
+        <Button type="button" name="edit" onClick={this.toggleEdit} value="Edit Job Details">
+        Edit Job Details
+        </Button>
+        <Button type="button" name="delete" onClick={() => {
           this.props.deleteJobDetails(this.props.job.id)
           this.setState({redirect: !this.state.redirect})
-        }} value="Delete Job"/>
+        }} value="Delete Job">
+        Delete Job
+        </Button>
         {this.state.redirect ? <Redirect to="/jobs"/> : null}
+        </Card.Content>
+        </Card>
       </div>
     )
   }

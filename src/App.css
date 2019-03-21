@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  /* align-items: center; */
+  /* font-weight:bold; */
+  /* font-size: 20px; */
+  /* font-family: 'Signika Negative', sans-serif; */
+  /* margin-top:10px; */
+
 }
 
 
@@ -20,18 +26,19 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: black;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: #a90000;
+  background: white;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
   height: 24px;
   width: 24px;
+  left:265px;
 }
 
 /* Color/shape of close button cross */
@@ -46,13 +53,19 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
+  /* width:1px; */
+  /* width: 1%; */
 }
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
+  /* background: #373a47; */
+  /* background: linear-gradient(45deg, #373a47, #ababad); */
+  /* background: #474A51; */
+  background-image: url('https://www.textures.com/system/gallery/photos/Substance/127830/Substance0093_18_download600.jpg');
+  padding: 2.0em .5em 0;
+  width:70%;
+  font-size: 1.4em;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -76,22 +89,52 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: rgba(0, 0, 0, 0.3);
 }
 
+.car-job{
+  color:#E2F0FF;
+  font-weight: bold;
+}
+
 .menu-item{
   color: white;
   padding: 10px;
   font-weight: 900
 }
 .menu-item:hover{
-  color: #a90000;
+  color: #3395FF;
   padding: 10px;
   cursor: pointer;
 }
 
 .queue-card {
-  width: 600px;
+  /* width: 600px; */
+  /* width:65%; */
+  flex:1;
   padding: 10px;
-  border: 5px solid gray;
-  margin: auto;
+  /* box-shadow: 5px 10px 10px grey; */
+  background: black;
+  margin: 10px;
+  opacity: 0.85;
+  padding:40px;
+  border-radius: 10px;
+}
+
+.queue-card:hover{
+  opacity:1;
+  border: 2px solid #d3dbe8;
+  transition-duration: .25s;
+}
+
+.job-desc{
+  color:#E2F0FF;
+  font-size: 18px;
+  line-height: 1px;
+}
+
+.queue-card-container{
+  /* flex-direction: column; */
+  display: flex;
+  /* align-items: center; */
+  margin-left: 20%;
 }
 
 .sort-btn{
@@ -106,16 +149,40 @@ Note: Beware of modifying this element as it can break the animations - you shou
   border: 5px solid gray;
   background-color: gray;
   margin: auto;
+  margin-top: 15%;
+  border-radius: 10px;
 }
 
 .car-job-header{
-  font-weight: 900;
-  color:blue;
+  font-size: 40px;
+  font-weight: 9000;
+  color:white;
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 1.5px;
 }
 
 .drop-down{
-  width: 150px;
+  width: 250px;
   padding-bottom: 10px;
   padding-top: 10px;
   margin: auto;
+}
+
+.link{
+  font-size: 22px;
+}
+
+.dash-button{
+  margin-top:20px !important;
+  background: #3395FF !important;
+  color: white !important;
+}
+
+h1{
+  color:white;
+  font-weight: bold;
+}
+.text{
+  color:white;
+  font-size: 20px;
 }

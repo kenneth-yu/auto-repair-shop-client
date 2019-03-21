@@ -6,6 +6,7 @@ import QueueContainer from '../containers/QueueContainer'
 import SortButtons from '../components/SortButtons'
 import { Redirect } from 'react-router-dom'
 
+
 class Dashboard extends React.Component{
 
   render(){

@@ -8,6 +8,7 @@ import NewCarContainer from './containers/NewCarContainer'
 import Customers from './containers/Customers'
 import Cars from './containers/Cars'
 import Jobs from './containers/Jobs'
+import {getUserWithToken} from './Redux/actions'
 // import SidebarContainer from './containers/SidebarContainer'
 // import Forbidden from './componenets/Forbidden'
 import { Route, Switch } from "react-router-dom";
@@ -18,7 +19,9 @@ import { withRouter } from 'react-router';
 // import url from './App'
 
 class App extends Component {
-
+componentDidMount(){
+  this.props.getUserWithToken()
+}
 
 
   render() {
@@ -42,6 +45,7 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getUserWithToken: () => dispatch(getUserWithToken())
   }
 }
 

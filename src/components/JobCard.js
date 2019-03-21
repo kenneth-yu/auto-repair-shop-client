@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getCars, getCustomers} from '../Redux/actions'
+import { Input, Button, List } from 'semantic-ui-react'
 
 class JobCard extends React.Component{
 
@@ -17,11 +18,11 @@ class JobCard extends React.Component{
       let relevantCar = allCars.find(oneCar => oneCar.id === jobDetails.car_id)
       // let relevantCustomer = allCustomers.find(oneCustomer => oneCustomer.id === relevantCar.customer_id)
     return(
-        <li>
-          <Link to={`/jobs/${this.props.jobDetails.id}`}>
+        <List.Item>
+          <Link to={`/jobs/${this.props.jobDetails.id}`} className="link">
           {this.props.jobDetails.job_name + " - " + relevantCar.year + " " + relevantCar.make + " " + relevantCar.model}
           </Link>
-        </li>
+        </List.Item>
     )
   }
     else{

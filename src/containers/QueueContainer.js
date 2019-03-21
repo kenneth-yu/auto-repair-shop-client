@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import QueueCard from '../components/QueueCard'
 import {getJobs} from '../Redux/actions'
+import { Card, Grid} from 'semantic-ui-react'
 
 class QueueContainer extends React.Component{
   componentDidMount(){
@@ -12,7 +13,13 @@ class QueueContainer extends React.Component{
     if (this.props.allJobs.length > 0){
       let allJobList = this.props.allJobs.map(oneJob => <QueueCard key={oneJob.id} jobDetails={oneJob}/>)
     return(
-      allJobList
+      <div className="queue-card-container">
+      <Grid divided='vertically'>
+        <Grid.Row columns={2}>
+        {allJobList}
+        </Grid.Row>
+      </Grid>
+      </div>
     )
   }
   else{

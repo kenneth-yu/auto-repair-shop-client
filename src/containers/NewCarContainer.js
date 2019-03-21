@@ -33,7 +33,7 @@ class NewCarContainer extends React.Component{
       <div>
       <SidebarContainer/>
         <div className="drop-down">
-          <Select labelField="name" options={options} onChange={(values) => this.setValues(values)} />
+          <Select placeholder="Select a Customer..." options={options} onChange={(values) => this.setValues(values)} />
         </div>
         <VinChecker selectedCustomer={this.state.selectedCustomer}/>
       </div>

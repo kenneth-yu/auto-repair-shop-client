@@ -5,6 +5,7 @@ import {getCars} from '../Redux/actions'
 import SidebarContainer from './SidebarContainer'
 import { Route, Switch } from "react-router-dom";
 import ShowCar from '../components/ShowCar'
+import { Input, Button, List } from 'semantic-ui-react'
 
 
 class Cars extends React.Component{
@@ -28,6 +29,7 @@ class Cars extends React.Component{
   render(){
     let filteredCars = this.props.allCars
     if(this.state.sortBy === "YEAR"){
+      //CURRENTLY THROWING AN ERROR
       filteredCars = this.props.allCars.filter(oneCar => oneCar.year.toString().includes(this.state.searchCar))
     }
     else if (this.state.sortBy === "MAKE"){
@@ -56,13 +58,15 @@ class Cars extends React.Component{
         ()=>{
           return (
             <div>
-              Sort By: <input type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="YEAR"/>
-              <input type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MAKE"/>
-              <input type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MODEL"/>
-              <input type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="COLOR"/>
+              Sort By: <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="YEAR">YEAR</Button>
+              <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MAKE">MAKE</Button>
+              <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MODEL">MODEL</Button>
+              <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="COLOR">COLOR</Button>
               <SidebarContainer/>
-              <input type="text" name="searchCar" onChange={this.changeHandler} value={this.state.searchCr}/>
-              <ul>{carList ? carList : null}</ul>
+              <Input placeholder={"SEARCHING BY..." + this.state.sortBy} type="text" name="searchCar" onChange={this.changeHandler} value={this.state.searchCar}/>
+              <List link>
+              {carList ? carList : null}
+              </List>
             </div>
           )
         }

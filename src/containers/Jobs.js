@@ -5,6 +5,7 @@ import {getJobs} from '../Redux/actions'
 import SidebarContainer from './SidebarContainer'
 import { Route, Switch } from "react-router-dom";
 import ShowJob from '../components/ShowJob'
+import { Input, Button, List } from 'semantic-ui-react'
 
 
 class Jobs extends React.Component{
@@ -32,7 +33,7 @@ class Jobs extends React.Component{
             return(
               <div>
               <SidebarContainer/>
-              <ul>{jobList}</ul>
+              <List link>{jobList}</List>
               </div>
             )
           }

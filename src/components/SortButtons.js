@@ -1,11 +1,16 @@
 import React from 'react'
+import {Button} from 'semantic-ui-react'
 
 class SortButton extends React.Component{
   render(){
     return(
       <div>
-        Sort By: <input type="button" className="sort-btn" name="filter-by-status" value="TIME"/>
-        <input type="button" className="sort-btn" name="filter-by-status" value="JOB STATUS"/>
+        <span className="text">Sort By:</span> <Button type="button" className="sort-btn" name="filter-by-status" value="TIME">
+        Time
+        </Button>
+        <Button type="button" className="sort-btn" name="filter-by-status" value="JOB STATUS">
+        Job Status
+        </Button>
       </div>
     )
   }

@@ -3,9 +3,9 @@ import {connect} from 'react-redux'
 import {addNewJob} from '../Redux/actions'
 import SidebarContainer from '../containers/SidebarContainer'
 import { Redirect } from 'react-router-dom'
+import { Input, Button } from 'semantic-ui-react'
 // import Select from "react-dropdown-select";
 import Select from 'react-select'
-
 import {getCars, getCustomers} from '../Redux/actions'
 
 class NewJob extends React.Component{
@@ -64,13 +64,16 @@ class NewJob extends React.Component{
       <div>
         <SidebarContainer/>
         <div className="drop-down">
-          <Select labelField="name" options={options} onChange={(values) => this.customerValues(values)} />
-          <Select labelField="model" options={this.state.relevantCars} onChange={(values) => this.setValues(values)} />
+          <Select placeholder="Select a Customer..." options={options} onChange={(values) => this.customerValues(values)} />
+          <Select placeholder="Select a Car..." options={this.state.relevantCars} onChange={(values) => this.setValues(values)} />
         </div>
-        Job Name: <input type="text" name="job_name" value={this.state.name} onChange={this.changeHandler}/><br/>
-        Quote: <input type="text" name="quote" value={this.state.quote=== -1 ? "" : this.state.quote} onChange={this.changeHandler}/><br/>
-        Notes: <input type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/><br/>
-        <input type="button" name="submit" value="Add New Job" onClick={() => this.props.addNewJob(this.props.currentUser, this.state.selectedCar, this.state.quote, this.state.job_name, this.state.notes)}/>
+        Job Name: <Input type="text" name="job_name" value={this.state.name} onChange={this.changeHandler}/><br/>
+        Quote: <Input type="text" name="quote" value={this.state.quote=== -1 ? "" : this.state.quote} onChange={this.changeHandler}/><br/>
+        Notes: <Input type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/><br/>
+        <Button type="button" name="submit" value="Add New Job"
+        onClick={() => this.props.addNewJob(this.props.currentUser, this.state.selectedCar, this.state.quote, this.state.job_name, this.state.notes)}>
+        Add New Job
+        </Button>
       </div>
     )
   }

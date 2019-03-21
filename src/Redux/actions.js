@@ -26,6 +26,30 @@ export function authenticateUser(username, password) {
   }
 }
 
+export function getUserWithToken(){
+  return(dispatch) =>{
+    let token = localStorage.token
+    if (token){
+      return fetch(`http://localhost:3000/api/v1/profile`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.token}`
+        }
+      }).then(res => res.json())
+      .then(data => {
+        if (data.message){
+          localStorage.removeItem('token')
+        }
+        else{
+          dispatch({type: "AUTHENTICATE_USER", payload: data.user})
+        }
+      })
+    }
+  }
+}
+
 export function createUser(username, password, passwordConfirm){
   return (dispatch) => {
     let user = {username: username, password: password}
@@ -103,20 +127,25 @@ export function getCars(){
 export function addNewCustomer(name, address, dob){
   return (dispatch)=> {
     let customer = {name:name, address:address, dob:dob}
-    return fetch(`http://localhost:3000/api/v1/customers`,{
-      method:'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${localStorage.token}`
-      },
-      body:JSON.stringify({customer})
-    })
-    .then(res => res.json())
-    .then(data => {
-      dispatch({type: "POST_NEW_CUSTOMER", payload: data})
-      window.alert("New Customer Added Successfully")
-    })
+    if (name && address && dob){
+      return fetch(`http://localhost:3000/api/v1/customers`,{
+        method:'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.token}`
+        },
+        body:JSON.stringify({customer})
+      })
+      .then(res => res.json())
+      .then(data => {
+        dispatch({type: "POST_NEW_CUSTOMER", payload: data})
+        window.alert("New Customer Added Successfully")
+      })
+    }
+    else{
+      window.alert("Please fill in ALL fields!")
+    }
   }
 }
 
@@ -125,40 +154,49 @@ export function addNewJob(user, car, quote, job_name, notes){
   // console.log(car)
   return (dispatch)=> {
     let newJob = {user_id: user.id, car_id: car, quote:quote, job_name:job_name, notes:notes}
-    return fetch(`http://localhost:3000/api/v1/jobs`,{
-      method:'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${localStorage.token}`
-      },
-      body:JSON.stringify({job: newJob})
-    })
-    .then(res => res.json())
-    .then(data => {
-      dispatch({type: "POST_NEW_JOBS", payload: data})
-    })
+    if (user && car && quote !== -1 && job_name){
+      return fetch(`http://localhost:3000/api/v1/jobs`,{
+        method:'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.token}`
+        },
+        body:JSON.stringify({job: newJob})
+      })
+      .then(res => res.json())
+      .then(data => {
+        dispatch({type: "POST_NEW_JOBS", payload: data})
+      })
+    }
+    else{
+      window.alert("A Customer and Car must be selected. Please Specify a Job Name and a Quote.")
+    }
   }
 }
 
 export function addNewCar(vin, year, make, model, color, customer){
-  console.log(customer)
   return (dispatch)=> {
     let newCar = {vin: vin, year: year, make: make, model:model, color:color, customer_id:customer}
-    return fetch(`http://localhost:3000/api/v1/cars`,{
-      method:'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${localStorage.token}`
-      },
-      body:JSON.stringify({car: newCar})
-    })
-    .then(res => res.json())
-    .then(data => {
-      dispatch({type: "POST_NEW_CAR", payload: data})
-      window.alert("New Car Added Successfully!")
-    })
+    if (vin && year && make && model && color && customer){
+      return fetch(`http://localhost:3000/api/v1/cars`,{
+        method:'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.token}`
+        },
+        body:JSON.stringify({car: newCar})
+      })
+      .then(res => res.json())
+      .then(data => {
+        dispatch({type: "POST_NEW_CAR", payload: data})
+        window.alert("New Car Added Successfully!")
+      })
+    }
+    else{
+      window.alert("Please select a Customer and fill in ALL fields!")
+    }
   }
 }
 
