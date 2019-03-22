@@ -26,12 +26,12 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: black;
+  background: white;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: white;
+  background: #3395FF;
 }
 
 /* Position and sizing of clickable cross button */
@@ -170,6 +170,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .link{
   font-size: 22px;
+  color: white !important;
+}
+
+.link:hover{
+  /* font-size: 23px; */
+  /* font-weight: bold; */
+  color: #3395FF !important;
 }
 
 .dash-button{

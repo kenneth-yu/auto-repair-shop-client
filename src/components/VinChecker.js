@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addNewCar} from '../Redux/actions'
-import { Input, Button } from 'semantic-ui-react'
+import { Input, Button, Form} from 'semantic-ui-react'
 
 class VinChecker extends React.Component{
   state = {
@@ -61,13 +61,13 @@ class VinChecker extends React.Component{
     // Supra - JT2JA81L4S0031188
     return (
       <div className="App">
-        Vin Number: <Input type="text" name="vinInputBox" onChange={this.changeHandler} value={this.state.vinInputBox}/>
+        <span className="text">Vin Number: </span><Form.Input type="text" name="vinInputBox" onChange={this.changeHandler} value={this.state.vinInputBox}/>
         <Button type="button" name="vin-submit" onClick={this.submitHandler} value="Search">Search</Button><br/>
         {this.state.badVin ? " Invalid VIN Number! Please Try Again or Use Manual Insertion!" : null}<br/>
-        Year: <Input type="text" name="year" onChange={this.changeHandler} value={this.state.year}/><br/>
-        Make: <Input type="text" name="make" onChange={this.changeHandler} value={this.state.make}/><br/>
-        Model: <Input type="text" name="model" onChange={this.changeHandler} value={this.state.model}/><br/>
-        Color: <Input type="text" name="color" onChange={this.changeHandler} value={this.state.color}/><br/>
+      <span className="text">Year: </span><Form.Input type="text" name="year" onChange={this.changeHandler} value={this.state.year}/><br/>
+      <span className="text">Make: </span><Form.Input type="text" name="make" onChange={this.changeHandler} value={this.state.make}/><br/>
+      <span className="text">Model: </span><Form.Input type="text" name="model" onChange={this.changeHandler} value={this.state.model}/><br/>
+      <span className="text">Color: </span><Form.Input type="text" name="color" onChange={this.changeHandler} value={this.state.color}/><br/>
         <Button type="button" name="submit"
         onClick={() => this.submitNewCar(this.state.vinInputBox, this.state.year, this.state.make, this.state.model, this.state.color, this.props.selectedCustomer)}>
         Submit New Car

@@ -26,7 +26,7 @@ class QueueCard extends React.Component{
           <h1 className="car-job-header">{!!relevantCar ? relevantCar.year+ " "+ relevantCar.make+ " " + relevantCar.model : null}</h1>
           <h1 className="car-job">{!!relevantCar ? jobDetails.job_name : null}</h1>
           <h2 className="job-desc">Time In: {!!relevantCar ? moment(jobDetails.created_at).format('lll') : null} </h2>
-          <h2 className="job-desc"> Status: {!!relevantCar ? (jobDetails.status ? "Completed":"In Progress") : null}</h2>
+          <h2 className="job-desc" style={jobDetails.status ? {color:"green"}:{color:"yellow"}}> Status: {!!relevantCar ? (jobDetails.status ? "Completed":"In Progress") : null}</h2>
           <h2 className="job-desc">Owner: {!!relevantCustomer ? relevantCustomer.name :null}</h2>
           <Button className="dash-button" onClick={() => this.props.toggleJobStatus(jobDetails)}
           type="button" name="finished" value="Mark Job as Completed">

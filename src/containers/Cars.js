@@ -11,7 +11,7 @@ import { Input, Button, List } from 'semantic-ui-react'
 class Cars extends React.Component{
   state = {
     searchCar: "",
-    sortBy: "",
+    sortBy: "YEAR",
     filteredCars: this.props.allCars
   }
 
@@ -58,7 +58,7 @@ class Cars extends React.Component{
         ()=>{
           return (
             <div>
-              Sort By: <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="YEAR">YEAR</Button>
+              <span className="text">Sort By: </span> <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="YEAR">YEAR</Button>
               <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MAKE">MAKE</Button>
               <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MODEL">MODEL</Button>
               <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="COLOR">COLOR</Button>
