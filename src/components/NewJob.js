@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {addNewJob} from '../Redux/actions'
 import SidebarContainer from '../containers/SidebarContainer'
 import { Redirect } from 'react-router-dom'
-import { Input, Button, Form} from 'semantic-ui-react'
+import { Button, Form} from 'semantic-ui-react'
 // import Select from "react-dropdown-select";
 import Select from 'react-select'
 import {getCars, getCustomers} from '../Redux/actions'
@@ -63,17 +63,21 @@ class NewJob extends React.Component{
     return(
       <div>
         <SidebarContainer/>
-        <div className="drop-down">
-          <Select placeholder="Select a Customer..." options={options} onChange={(values) => this.customerValues(values)} />
-          <Select placeholder="Select a Car..." options={this.state.relevantCars} onChange={(values) => this.setValues(values)} />
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <div className="jobs-form">
+          <h1>New Job Form</h1>
+          <div className="drop-down">
+            <Select placeholder="Select a Customer..." options={options} onChange={(values) => this.customerValues(values)} />
+            <Select placeholder="Select a Car..." options={this.state.relevantCars} onChange={(values) => this.setValues(values)} />
+          </div>
+          <Form.Input placeholder="Job Name..." type="text" name="job_name" value={this.state.name} onChange={this.changeHandler}/><br/>
+          <Form.Input placeholder="Quote..." type="text" name="quote" value={this.state.quote=== -1 ? "" : this.state.quote} onChange={this.changeHandler}/><br/>
+          <Form.Input placeholder="Notes..." type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/><br/>
+          <Button type="button" name="submit" value="Add New Job"
+          onClick={() => this.props.addNewJob(this.props.currentUser, this.state.selectedCar, this.state.quote, this.state.job_name, this.state.notes)}>
+          Add New Job
+          </Button>
         </div>
-      <span className="text">Job Name: </span><Form.Input type="text" name="job_name" value={this.state.name} onChange={this.changeHandler}/><br/>
-      <span className="text">Quote: </span><Form.Input type="text" name="quote" value={this.state.quote=== -1 ? "" : this.state.quote} onChange={this.changeHandler}/><br/>
-      <span className="text">Notes: </span><Form.Input type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/><br/>
-        <Button type="button" name="submit" value="Add New Job"
-        onClick={() => this.props.addNewJob(this.props.currentUser, this.state.selectedCar, this.state.quote, this.state.job_name, this.state.notes)}>
-        Add New Job
-        </Button>
       </div>
     )
   }

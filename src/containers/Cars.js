@@ -5,7 +5,7 @@ import {getCars} from '../Redux/actions'
 import SidebarContainer from './SidebarContainer'
 import { Route, Switch } from "react-router-dom";
 import ShowCar from '../components/ShowCar'
-import { Input, Button, List } from 'semantic-ui-react'
+import { Input, Button, List} from 'semantic-ui-react'
 
 
 class Cars extends React.Component{
@@ -25,8 +25,16 @@ class Cars extends React.Component{
     })
   }
 
+  changeSort = () =>{
+    this.setState({
+      sortBy: ""
+    })
+  }
+
+
 
   render(){
+
     let filteredCars = this.props.allCars
     if(this.state.sortBy === "YEAR"){
       //CURRENTLY THROWING AN ERROR
@@ -58,12 +66,15 @@ class Cars extends React.Component{
         ()=>{
           return (
             <div>
-              <span className="text">Sort By: </span> <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="YEAR">YEAR</Button>
-              <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MAKE">MAKE</Button>
-              <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MODEL">MODEL</Button>
-              <Button type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="COLOR">COLOR</Button>
-              <SidebarContainer/>
-              <Input placeholder={"SEARCHING BY..." + this.state.sortBy} type="text" name="searchCar" onChange={this.changeHandler} value={this.state.searchCar}/>
+            <SidebarContainer/>
+              <div className="pad-header">
+              <span className="header-text">All Cars</span>
+              </div>
+              <span className="text">Sort By: </span> <Button style={this.state.sortBy === "YEAR" ? {background:"#3395FF"} : null} type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="YEAR">YEAR</Button>
+              <Button style={this.state.sortBy === "MAKE" ? {background:"#3395FF"} : null} type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MAKE">MAKE</Button>
+              <Button style={this.state.sortBy === "MODEL" ? {background:"#3395FF"} : null} type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MODEL">MODEL</Button>
+              <Button style={this.state.sortBy === "COLOR" ? {background:"#3395FF"} : null} type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="COLOR">COLOR</Button>
+              <Input onChange={this.changeHandler}icon='search' value={this.state.searchCar} name="searchCar"placeholder='Search...' />
               <List link>
               {carList ? carList : null}
               </List>

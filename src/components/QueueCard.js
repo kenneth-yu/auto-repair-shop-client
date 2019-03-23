@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getCars, getCustomers, toggleJobStatus} from '../Redux/actions'
 import moment from 'moment'
-import { Card, Button, Grid } from 'semantic-ui-react'
+import {Button, Grid } from 'semantic-ui-react'
 
 class QueueCard extends React.Component{
   componentDidMount(){

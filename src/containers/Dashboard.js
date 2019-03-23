@@ -16,8 +16,10 @@ class Dashboard extends React.Component{
     return(
       <div>
         <SidebarContainer/>
-        <h1>Current Queue</h1>
+        <div className="header-div">
+        <span className="header-text">Current Queue</span>
         <SortButtons/><br/>
+        </div>
         <QueueContainer/>
       </div>
     )

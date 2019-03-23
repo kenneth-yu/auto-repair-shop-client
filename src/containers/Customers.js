@@ -5,7 +5,7 @@ import {getCustomers} from '../Redux/actions'
 import SidebarContainer from './SidebarContainer'
 import { Route, Switch } from "react-router-dom";
 import ShowCustomer from '../components/ShowCustomer'
-import { Input, Button, List } from 'semantic-ui-react'
+import { Input, List } from 'semantic-ui-react'
 
 
 class Customers extends React.Component{
@@ -40,6 +40,9 @@ class Customers extends React.Component{
             return(
               <div>
               <SidebarContainer/>
+              <div className="pad-header">
+              <span className="header-text">All Customers</span>
+              </div>
               <Input placeholder="Search Customers..."type="text" name="searchCustomer" onChange={this.changeHandler} value={this.state.searchCustomer}/>
               <List link>{customerList}</List>
               </div>

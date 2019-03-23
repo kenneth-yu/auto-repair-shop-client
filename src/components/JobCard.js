@@ -2,7 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getCars, getCustomers} from '../Redux/actions'
-import { Input, Button, List } from 'semantic-ui-react'
+import { List, Divider } from 'semantic-ui-react'
+import moment from 'moment'
 
 class JobCard extends React.Component{
 
@@ -18,11 +19,21 @@ class JobCard extends React.Component{
       let relevantCar = allCars.find(oneCar => oneCar.id === jobDetails.car_id)
       // let relevantCustomer = allCustomers.find(oneCustomer => oneCustomer.id === relevantCar.customer_id)
     return(
+      <div>
         <List.Item>
           <Link to={`/jobs/${this.props.jobDetails.id}`} className="link">
-          {this.props.jobDetails.job_name + " - " + relevantCar.year + " " + relevantCar.make + " " + relevantCar.model}
+          {this.props.jobDetails.job_name + " - " +
+          relevantCar.year + " " +
+          relevantCar.make + " " +
+          relevantCar.model + " - " +
+          moment(this.props.jobDetails.created_at).format('lll')
+        }
           </Link>
         </List.Item>
+        <div className="divider">
+        <Divider clearing></Divider>
+        </div>
+      </div>
     )
   }
     else{

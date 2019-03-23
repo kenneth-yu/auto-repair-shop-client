@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addNewCar} from '../Redux/actions'
-import { Input, Button, Form} from 'semantic-ui-react'
+import { Button, Form,Icon} from 'semantic-ui-react'
+import Select from 'react-select'
 
 class VinChecker extends React.Component{
   state = {
@@ -60,14 +61,17 @@ class VinChecker extends React.Component{
     // Integra - JH4DA345XKS022633
     // Supra - JT2JA81L4S0031188
     return (
-      <div className="App">
-        <span className="text">Vin Number: </span><Form.Input type="text" name="vinInputBox" onChange={this.changeHandler} value={this.state.vinInputBox}/>
-        <Button type="button" name="vin-submit" onClick={this.submitHandler} value="Search">Search</Button><br/>
-        {this.state.badVin ? " Invalid VIN Number! Please Try Again or Use Manual Insertion!" : null}<br/>
-      <span className="text">Year: </span><Form.Input type="text" name="year" onChange={this.changeHandler} value={this.state.year}/><br/>
-      <span className="text">Make: </span><Form.Input type="text" name="make" onChange={this.changeHandler} value={this.state.make}/><br/>
-      <span className="text">Model: </span><Form.Input type="text" name="model" onChange={this.changeHandler} value={this.state.model}/><br/>
-      <span className="text">Color: </span><Form.Input type="text" name="color" onChange={this.changeHandler} value={this.state.color}/><br/>
+      <div className="car-form">
+        <h1>New Car Form</h1>
+        <div className="drop-down">
+          <Select placeholder="Select a Customer..." options={this.props.options} onChange={(values) => this.setValues(values)} />
+        </div>
+        <Form.Input icon={<Icon name='search' inverted circular link onClick={this.submitHandler}/>} placeholder="Vin Number..." type="text" name="vinInputBox" onChange={this.changeHandler} value={this.state.vinInputBox}/><br/>
+        {this.state.badVin ? <span className="text">Invalid VIN Number! Please Try Again or Use Manual Insertion!</span>: null}<br/>
+        <Form.Input placeholder="Year..." type="text" name="year" onChange={this.changeHandler} value={this.state.year}/><br/>
+        <Form.Input placeholder="Make..." type="text" name="make" onChange={this.changeHandler} value={this.state.make}/><br/>
+        <Form.Input placeholder="Model..." type="text" name="model" onChange={this.changeHandler} value={this.state.model}/><br/>
+        <Form.Input placeholder="Color..." type="text" name="color" onChange={this.changeHandler} value={this.state.color}/><br/>
         <Button type="button" name="submit"
         onClick={() => this.submitNewCar(this.state.vinInputBox, this.state.year, this.state.make, this.state.model, this.state.color, this.props.selectedCustomer)}>
         Submit New Car

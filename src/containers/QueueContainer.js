@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import QueueCard from '../components/QueueCard'
 import {getJobs} from '../Redux/actions'
-import { Card, Grid} from 'semantic-ui-react'
+import {Grid} from 'semantic-ui-react'
 
 class QueueContainer extends React.Component{
   componentDidMount(){

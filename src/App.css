@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:400,700');
+
 .App {
   text-align: center;
   /* align-items: center; */
@@ -5,6 +7,7 @@
   /* font-size: 20px; */
   /* font-family: 'Signika Negative', sans-serif; */
   /* margin-top:10px; */
+  font-family: 'Oswald', sans-serif;
 
 }
 
@@ -144,12 +147,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .login{
-  width: 600px;
-  padding: 10px;
-  border: 5px solid gray;
-  background-color: gray;
+  width: 500px;
   margin: auto;
   margin-top: 15%;
+  border-radius: 10px;
+
+  /* width: 400px; */
+  padding: 50px;
+  border: 3px solid white;
   border-radius: 10px;
 }
 
@@ -185,6 +190,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
   color: white !important;
 }
 
+.selectedsort{
+  background: #3395FF !important;
+  color: white !important;
+}
+.card{
+  font-size: 20px;
+  /* line-height: 30px; */
+}
+
 h1{
   color:white;
   font-weight: bold;
@@ -192,4 +206,62 @@ h1{
 .text{
   color:white;
   font-size: 20px;
+}
+.car-form{
+  /* display: inline; */
+  /* position: absolute; */
+  width: 500px;
+  padding: 30px;
+  border: 3px solid white;
+  margin:auto;
+  border-radius: 10px;
+}
+
+.jobs-form{
+  /* display: inline; */
+  /* position: absolute; */
+  width: 500px;
+  padding: 30px;
+  border: 3px solid white;
+  margin:auto;
+  border-radius: 10px;
+}
+
+.customer-form{
+  width: 400px;
+  padding: 50px;
+  border: 3px solid white;
+  margin:auto;
+  border-radius: 10px;
+}
+
+.divider{
+  width: 600px;
+  margin:auto;
+}
+
+.header-text{
+  font-size: 50px;
+  color:white;
+}
+
+.header-div{
+  padding-top:50px;
+  padding-bottom:15px;
+}
+
+.pad-header{
+  padding-top:40px;
+  padding-bottom:15px;
+}
+
+.owned-cars{
+  padding-top:40px !important;
+  padding-bottom:15px !important;
+}
+
+.show-customer-card{
+  /* align-content: center !important; */
+  /* width: 500px; */
+  padding-top: 40px !important;
 }

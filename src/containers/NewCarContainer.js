@@ -3,7 +3,6 @@ import VinChecker from '../components/VinChecker'
 import SidebarContainer from './SidebarContainer'
 import { Redirect } from 'react-router-dom'
 // import Select from "react-dropdown-select";
-import Select from 'react-select'
 import {connect} from 'react-redux'
 import {getCustomers} from '../Redux/actions'
 
@@ -31,11 +30,9 @@ class NewCarContainer extends React.Component{
     console.log(this.state.selectedCustomer)
     return(
       <div>
-      <SidebarContainer/>
-        <div className="drop-down">
-          <Select placeholder="Select a Customer..." options={options} onChange={(values) => this.setValues(values)} />
-        </div>
-        <VinChecker selectedCustomer={this.state.selectedCustomer}/>
+        <SidebarContainer/>
+        <br/><br/><br/><br/><br/><br/><br/>
+        <VinChecker options={options} selectedCustomer={this.state.selectedCustomer}/>
       </div>
     )
   }

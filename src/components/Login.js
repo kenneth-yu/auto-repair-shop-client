@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {authenticateUser, createUser} from '../Redux/actions'
 import { Redirect } from 'react-router-dom'
-import {Form, Button, Container} from 'semantic-ui-react'
+import {Form, Button, Input} from 'semantic-ui-react'
 
 class Login extends React.Component{
   state = {
@@ -32,17 +32,17 @@ class Login extends React.Component{
     return(
       <Form className="login">
         <Form.Field>
-          <label>Username</label>
-          <input type="text" name="username" value={this.state.username} onChange={this.changeHandler}/>
+          <label style={{color: "white"}}>Username</label>
+          <Input placeholder="Username..." type="text" name="username" value={this.state.username} onChange={this.changeHandler}/>
         </Form.Field>
         <Form.Field>
-          <label>Password</label>
-          <input type="text" name="password" value={this.state.password} onChange={this.changeHandler}/><br/>
+          <label style={{color: "white"}}>Password</label>
+          <Input placeholder="Password..." type="text" name="password" value={this.state.password} onChange={this.changeHandler}/><br/>
         </Form.Field>
         <Form.Field>
-          {this.state.newAccount ? <label>Confirm Password</label> : null}
+          {this.state.newAccount ? <label style={{color: "white"}}>Confirm Password</label> : null}
           {this.state.newAccount ?
-          <input type="text" name="passwordConfirm" value={this.state.passwordConfirm} onChange={this.changeHandler}/>
+          <Input placeholder="Password Confirmation..." type="text" name="passwordConfirm" value={this.state.passwordConfirm} onChange={this.changeHandler}/>
           : null}
         </Form.Field>
           {this.state.newAccount ?
@@ -55,7 +55,8 @@ class Login extends React.Component{
           Login
         </Button>}
         <Form.Field>
-        <span className="pseudolink" onClick={this.clickHandler}>Create a New Account</span>
+        <br/>
+        <span style={{color:"#3395FF"}}className="pseudolink" onClick={this.clickHandler}>Create a New Account</span>
         </Form.Field>
       </Form>
     )

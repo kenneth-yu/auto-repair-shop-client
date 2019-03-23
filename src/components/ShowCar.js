@@ -1,11 +1,17 @@
 import React from 'react'
 import SidebarContainer from '../containers/SidebarContainer'
-import VinChecker from '../components/VinChecker'
 import {connect} from 'react-redux'
 import {updateCarDetails} from '../Redux/actions'
-import {Card, Image, Button, Input} from 'semantic-ui-react'
+import {Card, Image, Button, Input, Grid, List} from 'semantic-ui-react'
+import {getCustomers, getJobs} from '../Redux/actions'
+import CustomerCard from './CustomerCard'
+import JobCard from './JobCard'
 
 class ShowCustomer extends React.Component{
+  componentDidMount(){
+    this.props.getCustomers()
+    this.props.getJobs()
+  }
 
   state = {
     edit: false,
@@ -30,9 +36,24 @@ class ShowCustomer extends React.Component{
   }
 
   render(){
+    let relevantCustomer
+    let relevantCustomerList
+    let relevantJobs
+    let relevantJobList
+    if(this.props.allCustomers.length > 0 ){
+      relevantCustomer = this.props.allCustomers.filter(oneCustomer => oneCustomer.id === this.props.car.customer_id)
+      relevantCustomerList = relevantCustomer.map(oneCustomer => <CustomerCard key={oneCustomer.id} customerDetails={oneCustomer}/>)
+    }
+    if(this.props.allJobs.length>0){
+      relevantJobs = this.props.allJobs.filter(oneJob => oneJob.car_id === this.props.car.id)
+      relevantJobList = relevantJobs.map(oneJob => <JobCard key={oneJob.id} jobDetails={oneJob}/>)
+    }
     return(
-      <div>
-        <SidebarContainer/>
+      <div className="show-customer-card">
+      <SidebarContainer/>
+      <Grid centered columns={2}>
+        <Grid.Row>
+        <Grid.Column width={4}>
         <Card centered>
         <Image src="https://avatarfiles.alphacoders.com/123/123711.jpg"/>
         <Card.Content>
@@ -52,6 +73,22 @@ class ShowCustomer extends React.Component{
         Edit Car Details
         </Button>
         </Card>
+        </Grid.Column>
+        <Grid.Column width={6}>
+        <Card.Content className="owned-cars">
+        <span className="header-text">Owner:</span>
+          <List link >
+            {relevantCustomerList}
+          </List>
+          <br/><br/>
+        <span className="header-text">Car History:</span>
+          <List link >
+            {relevantJobList}
+          </List>
+        </Card.Content>
+        </Grid.Column>
+        </Grid.Row>
+      </Grid>
       </div>
     )
   }
@@ -59,9 +96,18 @@ class ShowCustomer extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCarDetails: (id, vin, year, make, model, color) => dispatch(updateCarDetails(id, vin, year, make, model, color))
+    updateCarDetails: (id, vin, year, make, model, color) => dispatch(updateCarDetails(id, vin, year, make, model, color)),
+    getCustomers: () => dispatch(getCustomers()),
+    getJobs: () => dispatch(getJobs())
+  }
+}
+
+const mapStateToProps = (state) => {
+  return{
+    allCustomers: state.reducer.allCustomers,
+    allJobs: state.reducer.allJobs
   }
 }
 
 
-export default connect(null, mapDispatchToProps)(ShowCustomer)
+export default connect(mapStateToProps, mapDispatchToProps)(ShowCustomer)

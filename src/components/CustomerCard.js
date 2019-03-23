@@ -1,14 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import { Input, Button, List } from 'semantic-ui-react'
+import { List, Divider} from 'semantic-ui-react'
 
 class CustomerCard extends React.Component{
 
   render(){
-    return(<List.Item>
+    return(
+      <div>
+      <List.Item>
       <Link to={`/customers/${this.props.customerDetails.id}`} className="link">{this.props.customerDetails.name}</Link>
-      </List.Item>)
+      </List.Item>
+      <div className="divider">
+      <Divider clearing></Divider>
+      </div>
+      </div>
+    )
   }
 }
 
