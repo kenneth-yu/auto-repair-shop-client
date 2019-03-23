@@ -12,13 +12,18 @@ class VinChecker extends React.Component{
     year:"",
     make: "",
     model: "",
-    color: ""
+    color: "",
+    selectedCustomer: {}
   }
 
   changeHandler = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     })
+  }
+
+  setValues = (values) => {
+    this.setState({selectedCustomer: values.value})
   }
 
   submitHandler = () => {

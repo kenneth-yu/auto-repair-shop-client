@@ -213,7 +213,6 @@ export function toggleJobStatus(jobDetails){
       body:JSON.stringify({status: !jobDetails.status })
     }).then(res => res.json())
     .then(data => {
-      console.log(data)
       dispatch({type: "TOGGLE_JOB_STATUS", payload:data})
     })
   }
