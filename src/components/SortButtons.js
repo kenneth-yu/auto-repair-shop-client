@@ -4,7 +4,7 @@ import {Button} from 'semantic-ui-react'
 class SortButton extends React.Component{
   render(){
     return(
-      <div>
+      <div className="sortBtnDiv">
         <span className="text">Sort By:</span> <Button type="button" className="sort-btn" name="filter-by-status" value="TIME">
         Time
         </Button>
