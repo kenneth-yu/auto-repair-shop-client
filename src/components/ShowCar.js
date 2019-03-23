@@ -49,8 +49,9 @@ class ShowCustomer extends React.Component{
       relevantJobList = relevantJobs.map(oneJob => <JobCard key={oneJob.id} jobDetails={oneJob}/>)
     }
     return(
-      <div className="show-customer-card">
+      <div>
       <SidebarContainer/>
+      <div className="show-customer-card">
       <Grid centered columns={2}>
         <Grid.Row>
         <Grid.Column width={4}>
@@ -89,6 +90,7 @@ class ShowCustomer extends React.Component{
         </Grid.Column>
         </Grid.Row>
       </Grid>
+      </div>
       </div>
     )
   }

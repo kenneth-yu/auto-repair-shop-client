@@ -54,7 +54,7 @@ class ShowCustomer extends React.Component{
               </Card.Meta>
               <Card.Description>
                 Address: {this.state.edit ? <Input type="text" name="address" onChange={this.changeHandler} value={this.state.address}/> : (this.props.customer.address)}<br/>
-                Date of Birth: {this.state.edit ? <Input type="text" name="dob" onChange={this.changeHandler} value={this.state.dob}/> : + this.props.customer.dob}<br/>
+                Date of Birth: {this.state.edit ? <Input type="text" name="dob" onChange={this.changeHandler} value={this.state.dob}/> : this.props.customer.dob}<br/>
                 Current Balance: {this.state.edit ? <Input type="text" name="vin" onChange={this.changeHandler} value={this.state.balance}/> : this.props.customer.balance}
               </Card.Description><br/>
           {this.state.edit ?

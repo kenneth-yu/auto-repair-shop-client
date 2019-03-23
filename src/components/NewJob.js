@@ -20,7 +20,8 @@ class NewJob extends React.Component{
     notes: "",
     relevantCars: [],
     selectedCustomer:{},
-    selectedCar:{}
+    selectedCar:{},
+    redirect: false
   }
 
   customerValues = (values) => {
@@ -74,7 +75,9 @@ class NewJob extends React.Component{
           <Form.Input placeholder="Quote..." type="text" name="quote" value={this.state.quote=== -1 ? "" : this.state.quote} onChange={this.changeHandler}/><br/>
           <Form.Input placeholder="Notes..." type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/><br/>
           <Button type="button" name="submit" value="Add New Job"
-          onClick={() => this.props.addNewJob(this.props.currentUser, this.state.selectedCar, this.state.quote, this.state.job_name, this.state.notes)}>
+          onClick={() => {
+            this.props.addNewJob(this.props.currentUser, this.state.selectedCar, this.state.quote, this.state.job_name, this.state.notes)
+          }}>
           Add New Job
           </Button>
         </div>
