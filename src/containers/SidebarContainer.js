@@ -48,7 +48,7 @@ class SidebarContainer extends React.Component {
 
 
     return (
-      <Menu width={'22%'}>
+      <Menu width={'15%'}>
         <span className="menu-item" id="dashboard"  onClick={(event) => this.props.setRedirectState(event.target.id)}>Dashboard</span>
         <span className="menu-item" id="newCustomer" onClick={(event) => this.props.setRedirectState(event.target.id)}>Add New Customer</span>
         <span className="menu-item" id="newCar" onClick={(event) => this.props.setRedirectState(event.target.id)}>Add New Car</span>

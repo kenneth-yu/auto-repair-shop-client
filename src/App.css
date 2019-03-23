@@ -41,7 +41,6 @@
 .bm-cross-button {
   height: 24px;
   width: 24px;
-  left:265px;
 }
 
 /* Color/shape of close button cross */
@@ -66,8 +65,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
   /* background: linear-gradient(45deg, #373a47, #ababad); */
   /* background: #474A51; */
   background-image: url('https://www.textures.com/system/gallery/photos/Substance/127830/Substance0093_18_download600.jpg');
-  padding: 2.0em .5em 0;
-  width:70%;
+  padding: 2.0em 1.5em 0;
+  /* width:70%; */
   font-size: 1.4em;
 }
 
