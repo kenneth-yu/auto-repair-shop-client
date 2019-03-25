@@ -14,6 +14,7 @@ class VinChecker extends React.Component{
     make: "",
     model: "",
     color: "",
+    img: "",
     selectedCustomer: {}
   }
 
@@ -46,13 +47,28 @@ class VinChecker extends React.Component{
     .then(res => res.json())
     .then(carData =>{
       if (carData.Results[8].Value !== null || carData.Results[5].Value !== null || carData.Results[7].Value !== null){
-        this.setState({
-          badVin: false,
-          year: carData.Results[8].Value,
-          make: carData.Results[5].Value,
-          model: carData.Results[7].Value,
-          transmission: carData.Results[45].Value
+        // console.log(carData)
+        fetch(`https://www.googleapis.com/customsearch/v1?q=
+          ${this.state.color !== "" ? this.state.color : ""}
+          ${carData.Results[8].Value}+
+          ${carData.Results[5].Value}+
+          ${carData.Results[7].Value}
+          &key=AIzaSyC4ioqvLK7y-euwThbV9-SxA91Cmc_Q5l4&cx=002150306261698239956:6eg27cbcjlg&searchType=image`)
+        .then(res=> res.json())
+        .then(data => {
+          console.log(data)
+          // console.log(data)
+          this.setState({
+            badVin: false,
+            year: carData.Results[8].Value,
+            make: carData.Results[5].Value,
+            model: carData.Results[7].Value,
+            img: data.items[0].link,
+            transmission: carData.Results[45].Value
+          })
         })
+          //data.items[0].pagemap.cse_image[0].src
+
       }
       else{
         this.setState({
@@ -79,6 +95,7 @@ class VinChecker extends React.Component{
     return (
       <div className="car-form">
         <h1>New Car Form</h1>
+        {this.state.img !== "" ? <div ><img className="img-div" width={"80%"}  alt="" src={this.state.img}/></div> : null}
         <div className="drop-down">
           <Select placeholder="Select a Customer..." options={this.props.options} onChange={(values) => this.setValues(values)} />
         </div>
@@ -88,6 +105,7 @@ class VinChecker extends React.Component{
         <Form.Input placeholder="Make..." type="text" name="make" onChange={this.changeHandler} value={this.state.make}/><br/>
         <Form.Input placeholder="Model..." type="text" name="model" onChange={this.changeHandler} value={this.state.model}/><br/>
         <Form.Input placeholder="Color..." type="text" name="color" onChange={this.changeHandler} value={this.state.color}/><br/>
+        <br/>
         <Button type="button" name="submit"
         onClick={() => this.props.addNewCar(this.state.vinInputBox, this.state.year, this.state.make, this.state.model, this.state.color, this.state.selectedCustomer)}>
         Submit New Car
