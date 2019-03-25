@@ -7,11 +7,25 @@ import { Button, Form} from 'semantic-ui-react'
 // import Select from "react-dropdown-select";
 import Select from 'react-select'
 import {getCars, getCustomers} from '../Redux/actions'
+import {withRouter} from 'react-router'
 
 class NewJob extends React.Component{
   componentDidMount(){
     this.props.getCars()
     this.props.getCustomers()
+  }
+
+  componentDidUpdate(){
+    console.log(this.props.redirect)
+    if (this.props.redirect === true){
+      this.props.history.push(`/jobs/${this.props.redirectTo}`)
+    }
+  }
+
+  componentWillUnmount(){
+    if (this.props.redirect === true){
+      this.props.resetShowRedirect()
+    }
   }
 
   state = {
@@ -90,7 +104,8 @@ const mapDispatchToProps = (dispatch) => {
   return{
     addNewJob: (currentUser, selectedCar, quote, job_name, notes) => dispatch(addNewJob(currentUser, selectedCar, quote, job_name, notes)),
     getCustomers: () => dispatch(getCustomers()),
-    getCars: () => dispatch(getCars())
+    getCars: () => dispatch(getCars()),
+    resetShowRedirect: () => dispatch({type:"RESET_SHOW_REDIRECT", payload: null})
   }
 }
 
@@ -98,9 +113,11 @@ const mapStateToProps = (state) =>{
   return{
     allCustomers: state.reducer.allCustomers,
     allCars: state.reducer.allCars,
-    currentUser: state.reducer.currentUser
+    currentUser: state.reducer.currentUser,
+    redirect: state.reducer.redirect,
+    redirectTo: state.reducer.redirectTo
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewJob)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewJob))

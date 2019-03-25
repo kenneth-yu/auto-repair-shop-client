@@ -4,12 +4,26 @@ import {addNewCustomer} from '../Redux/actions'
 import SidebarContainer from '../containers/SidebarContainer'
 import { Redirect } from 'react-router-dom'
 import {Button, Form } from 'semantic-ui-react'
+import {withRouter} from 'react-router'
 
 class NewCustomer extends React.Component{
   state = {
     name: "",
     address: "",
     dob: ""
+  }
+
+  componentDidUpdate(){
+    console.log(this.props.redirect)
+    if (this.props.redirect === true){
+      this.props.history.push(`/customers/${this.props.redirectTo}`)
+    }
+  }
+
+  componentWillUnmount(){
+    if (this.props.redirect === true){
+      this.props.resetShowRedirect()
+    }
   }
 
   changeHandler = (event) =>{
@@ -43,8 +57,15 @@ class NewCustomer extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    addNewCustomer: (name, address, dob) => dispatch(addNewCustomer(name, address, dob))
+    addNewCustomer: (name, address, dob) => dispatch(addNewCustomer(name, address, dob)),
+    resetShowRedirect: () => dispatch({type:"RESET_SHOW_REDIRECT", payload: null})
   }
 }
 
-export default connect(null, mapDispatchToProps)(NewCustomer)
+const mapStateToProps = (state) =>{
+  return{
+    redirect: state.reducer.redirect,
+    redirectTo: state.reducer.redirectTo
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewCustomer))

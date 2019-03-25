@@ -7,18 +7,13 @@ import {connect} from 'react-redux'
 import {getCustomers} from '../Redux/actions'
 
 
+
 class NewCarContainer extends React.Component{
   componentDidMount(){
     this.props.getCustomers()
   }
 
-  state = {
-    selectedCustomer: {}
-  }
 
-  setValues = (values) => {
-    this.setState({selectedCustomer: values.value})
-  }
 
   render(){
     if (!localStorage.getItem('token')){
@@ -27,12 +22,11 @@ class NewCarContainer extends React.Component{
     let options = this.props.allCustomers.map(oneCustomer => {
       return {value: oneCustomer.id, label: oneCustomer.name}
     })
-    console.log(this.state.selectedCustomer)
     return(
       <div>
         <SidebarContainer/>
         <br/><br/><br/><br/><br/><br/><br/>
-        <VinChecker options={options} selectedCustomer={this.state.selectedCustomer}/>
+        <VinChecker options={options}/>
       </div>
     )
   }
@@ -40,13 +34,14 @@ class NewCarContainer extends React.Component{
 
 const mapStateToProps = (state) =>{
   return{
-    allCustomers: state.reducer.allCustomers
+    allCustomers: state.reducer.allCustomers,
+
   }
 }
 
 const mapDispatchToProps = (dispatch) =>{
   return{
-    getCustomers: () => dispatch(getCustomers())
+    getCustomers: () => dispatch(getCustomers()),
   }
 }
 

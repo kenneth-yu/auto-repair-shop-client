@@ -195,6 +195,7 @@ export function addNewCar(vin, year, make, model, color, customer){
       })
     }
     else{
+      console.log(vin, year, make, model, color, customer)
       window.alert("Please select a Customer and fill in ALL fields!")
     }
   }

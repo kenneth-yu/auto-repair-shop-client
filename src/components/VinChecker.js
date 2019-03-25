@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {addNewCar} from '../Redux/actions'
 import { Button, Form,Icon} from 'semantic-ui-react'
 import Select from 'react-select'
+import {withRouter} from 'react-router'
 
 class VinChecker extends React.Component{
   state = {
@@ -16,6 +17,18 @@ class VinChecker extends React.Component{
     selectedCustomer: {}
   }
 
+  componentDidUpdate(){
+    if (this.props.redirect === true){
+      this.props.history.push(`/cars/${this.props.redirectTo}`)
+    }
+  }
+
+  componentWillUnmount(){
+    if (this.props.redirect === true){
+      this.props.resetShowRedirect()
+    }
+  }
+
   changeHandler = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -23,6 +36,7 @@ class VinChecker extends React.Component{
   }
 
   setValues = (values) => {
+    console.log(values.value)
     this.setState({selectedCustomer: values.value})
   }
 
@@ -57,9 +71,6 @@ class VinChecker extends React.Component{
     })
   }
 
-  submitNewCar = (vin, year, make, model, color, customer) => {
-    this.props.addNewCar(vin, year, make, model, color, customer)
-  }
 
   render() {
     // Prelude - JHMBB61461C004723
@@ -78,7 +89,7 @@ class VinChecker extends React.Component{
         <Form.Input placeholder="Model..." type="text" name="model" onChange={this.changeHandler} value={this.state.model}/><br/>
         <Form.Input placeholder="Color..." type="text" name="color" onChange={this.changeHandler} value={this.state.color}/><br/>
         <Button type="button" name="submit"
-        onClick={() => this.submitNewCar(this.state.vinInputBox, this.state.year, this.state.make, this.state.model, this.state.color, this.props.selectedCustomer)}>
+        onClick={() => this.props.addNewCar(this.state.vinInputBox, this.state.year, this.state.make, this.state.model, this.state.color, this.state.selectedCustomer)}>
         Submit New Car
         </Button>
       </div>
@@ -86,16 +97,18 @@ class VinChecker extends React.Component{
   }
 }
 
-// const mapStateToProps = (state) => {
-//   // console.log(state)
-//   return {
-//     badVin: state.badVin,
-//   }
-// }
-//
-const mapDispatchToProps = (dispatch) => {
-  return{
-    addNewCar:(vin, year, make, model, color, customer) => dispatch(addNewCar(vin, year, make, model, color, customer))
+const mapStateToProps = (state) => {
+  // console.log(state)
+  return {
+    redirect: state.reducer.redirect,
+    redirectTo: state.reducer.redirectTo
   }
 }
-export default connect(null, mapDispatchToProps)(VinChecker);
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    addNewCar:(vin, year, make, model, color, customer) => dispatch(addNewCar(vin, year, make, model, color, customer)),
+    resetShowRedirect: () => dispatch({type:"RESET_SHOW_REDIRECT", payload: null})
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VinChecker));

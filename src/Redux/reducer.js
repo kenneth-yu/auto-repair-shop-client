@@ -10,7 +10,9 @@ const initialState = {
   newJob: false,
   searchCustomer: false,
   searchCar: false,
-  searchJob: false
+  searchJob: false,
+  redirect:false,
+  redirectTo:""
 }
 
 
@@ -30,13 +32,13 @@ export default function reducer(state = initialState, action) {
       return{...state, allCars: action.payload}
 
     case "POST_NEW_CUSTOMER":
-      return {...state, allCustomers: [...state.allCustomers, action.payload]}
+      return {...state, allCustomers: [...state.allCustomers, action.payload], redirect: true, redirectTo: action.payload.id}
 
     case "POST_NEW_JOBS":
-      return {...state, allJobs: [...state.allJobs, action.payload]}
+      return {...state, allJobs: [...state.allJobs, action.payload], redirect: true, redirectTo: action.payload.id}
 
-    case "POST_NEW_CARS":
-      return {...state, allCars: [...state.allCars, action.payload]}
+    case "POST_NEW_CAR":
+      return {...state, allCars: [...state.allCars, action.payload], redirect: true, redirectTo: action.payload.id}
 
     case "TOGGLE_JOB_STATUS":
       let jobArray = state.allJobs.map(oneCustomer => {
@@ -89,6 +91,9 @@ export default function reducer(state = initialState, action) {
     case "SET_REDIRECT_STATE":
       // console.log(action.payload)
       return {...state, [action.payload]:true }
+
+    case "RESET_SHOW_REDIRECT":
+      return {...state, redirect: false, redirectTo: ""}
 
     case "RESET_REDIRECT_STATE":
       return{...state,
