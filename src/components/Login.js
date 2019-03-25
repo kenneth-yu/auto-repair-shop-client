@@ -33,11 +33,11 @@ class Login extends React.Component{
       <Form className="login">
         <Form.Field>
           <label style={{color: "white"}}>Username</label>
-          <Input placeholder="Username..." type="text" name="username" value={this.state.username} onChange={this.changeHandler}/>
+          <Input placeholder="Username..." type="text" autoComplete="username" name="username" value={this.state.username} onChange={this.changeHandler}/>
         </Form.Field>
         <Form.Field>
           <label style={{color: "white"}}>Password</label>
-          <Input placeholder="Password..." type="text" name="password" value={this.state.password} onChange={this.changeHandler}/><br/>
+          <Input placeholder="Password..." type="password" autoComplete="current-password" name="password" value={this.state.password} onChange={this.changeHandler}/><br/>
         </Form.Field>
         <Form.Field>
           {this.state.newAccount ? <label style={{color: "white"}}>Confirm Password</label> : null}

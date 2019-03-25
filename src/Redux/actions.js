@@ -5,7 +5,7 @@
 export function authenticateUser(username, password) {
   return (dispatch) => {
     let user = {username: username, password: password}
-    return fetch(`http://localhost:3000/api/v1/login`, {
+    return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export function getUserWithToken(){
   return(dispatch) =>{
     let token = localStorage.token
     if (token){
-      return fetch(`http://localhost:3000/api/v1/profile`, {
+      return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/profile`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export function createUser(username, password, passwordConfirm){
     let user = {username: username, password: password}
     if (username !== "" && password !== "" && passwordConfirm !== ""){
         if(password === passwordConfirm){
-          return fetch(`http://localhost:3000/api/v1/users`, {
+          return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/users`, {
             method:'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export function createUser(username, password, passwordConfirm){
 
 export function getJobs(){
   return (dispatch) => {
-    return fetch(`http://localhost:3000/api/v1/jobs`,{
+    return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/jobs`,{
       method:'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export function getJobs(){
 }
 export function getCustomers(){
   return (dispatch) => {
-    return fetch(`http://localhost:3000/api/v1/customers`,{
+    return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/customers`,{
       method:'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ export function getCustomers(){
 }
 export function getCars(){
   return (dispatch) => {
-    return fetch(`http://localhost:3000/api/v1/cars`,{
+    return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/cars`,{
       method:'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ export function addNewCustomer(name, address, dob){
   return (dispatch)=> {
     let customer = {name:name, address:address, dob:dob}
     if (name && address && dob){
-      return fetch(`http://localhost:3000/api/v1/customers`,{
+      return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/customers`,{
         method:'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ export function addNewJob(user, car, quote, job_name, notes){
   return (dispatch)=> {
     let newJob = {user_id: user.id, car_id: car, quote:quote, job_name:job_name, notes:notes}
     if (user && car && quote !== -1 && job_name){
-      return fetch(`http://localhost:3000/api/v1/jobs`,{
+      return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/jobs`,{
         method:'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ export function addNewCar(vin, year, make, model, color, customer){
   return (dispatch)=> {
     let newCar = {vin: vin, year: year, make: make, model:model, color:color, customer_id:customer}
     if (vin && year && make && model && color && customer){
-      return fetch(`http://localhost:3000/api/v1/cars`,{
+      return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/cars`,{
         method:'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ export function addNewCar(vin, year, make, model, color, customer){
 export function toggleJobStatus(jobDetails){
   return (dispatch)=> {
     console.log(jobDetails)
-    return fetch(`http://localhost:3000/api/v1/jobs/${jobDetails.id},`,{
+    return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/jobs/${jobDetails.id},`,{
       method:'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -222,7 +222,7 @@ export function toggleJobStatus(jobDetails){
 export function updateCarDetails(id, vin, year, make, model, color){
   let carDetails = {id: id, vin: vin, year: year, make: make, model: model, color: color}
   return (dispatch)=> {
-          return fetch(`http://localhost:3000/api/v1/cars/${carDetails.id},`,{
+          return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/cars/${carDetails.id},`,{
           method:'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -240,7 +240,7 @@ export function updateCarDetails(id, vin, year, make, model, color){
 export function updateCustomerDetails(id, name, address, dob, balance){
   let customerDetails = {id:id , name:name, address:address, dob:dob, balance:balance}
   return (dispatch)=> {
-          return fetch(`http://localhost:3000/api/v1/customers/${customerDetails.id},`,{
+          return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/customers/${customerDetails.id},`,{
           method:'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -258,7 +258,7 @@ export function updateCustomerDetails(id, name, address, dob, balance){
 export function updateJobDetails(id, name, car, quote, status, notes){
   let jobDetails = {id:id, name:name, car:car, quote:quote, status:status, notes:notes}
   return (dispatch)=> {
-          return fetch(`http://localhost:3000/api/v1/jobs/${jobDetails.id},`,{
+          return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/jobs/${jobDetails.id},`,{
           method:'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -277,7 +277,7 @@ export function deleteJobDetails(id){
   let jobDetails = {id:id}
   console.log(id)
   return (dispatch)=> {
-          return fetch(`http://localhost:3000/api/v1/jobs/${jobDetails.id},`,{
+          return fetch(`https://auto-repair-shop-server.herokuapp.com//api/v1/jobs/${jobDetails.id},`,{
           method:'DELETE',
           headers: {
             'Content-Type': 'application/json',
