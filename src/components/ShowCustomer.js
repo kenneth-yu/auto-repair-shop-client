@@ -15,7 +15,8 @@ class ShowCustomer extends React.Component{
     name: this.props.customer.name,
     address: this.props.customer.address,
     dob: this.props.customer.dob,
-    balance:this.props.customer.balance
+    balance:this.props.customer.balance,
+    img: this.props.customer.img ? this.props.customer.img : ""
   }
 
   changeHandler = (event) => {
@@ -46,7 +47,7 @@ class ShowCustomer extends React.Component{
           <Grid.Row>
             <Grid.Column width={4}>
             <Card centered>
-              <Image src='https://media.gq.com/photos/5707f229f325b48d09952e3c/master/w_800/bert.jpg' />
+              {this.props.customer.img ?  <Image src={this.props.customer.img}/> : <Image src='https://stroseschool.stroselions.net/wp-content/uploads/2018/04/profile-blank-reva.png'/>}
             <Card.Content>
               <Card.Header>{this.state.edit ? <Input type="text" name="name" onChange={this.changeHandler} value={this.state.name}/> : this.props.customer.name}</Card.Header>
               <Card.Meta>
@@ -56,10 +57,11 @@ class ShowCustomer extends React.Component{
                 Address: {this.state.edit ? <Input type="text" name="address" onChange={this.changeHandler} value={this.state.address}/> : (this.props.customer.address)}<br/>
                 Date of Birth: {this.state.edit ? <Input type="text" name="dob" onChange={this.changeHandler} value={this.state.dob}/> : this.props.customer.dob}<br/>
                 Current Balance: {this.state.edit ? <Input type="text" name="vin" onChange={this.changeHandler} value={this.state.balance}/> : this.props.customer.balance}
+                {this.state.edit ? <span>Image URL: </span> : null}{this.state.edit ? (<Input type="text" name="img" onChange={this.changeHandler} value={this.state.img}/>) : null}
               </Card.Description><br/>
           {this.state.edit ?
           <Button type="button" name="submit" onClick={() => {
-            this.props.updateCustomerDetails(this.props.customer.id, this.state.name, this.state.address, this.state.dob, this.state.balance)
+            this.props.updateCustomerDetails(this.props.customer.id, this.state.name, this.state.address, this.state.dob, this.state.balance, this.state.img)
             this.setState({edit:!this.state.edit})
           }} value="Submit Edit">
           Submit Edit
@@ -89,7 +91,7 @@ class ShowCustomer extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    updateCustomerDetails: (id, name, address, dob, balance) => dispatch(updateCustomerDetails(id, name, address, dob, balance)),
+    updateCustomerDetails: (id, name, address, dob, balance, img) => dispatch(updateCustomerDetails(id, name, address, dob, balance, img)),
     getCars: () => dispatch(getCars())
   }
 }

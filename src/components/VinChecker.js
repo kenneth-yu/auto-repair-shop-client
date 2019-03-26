@@ -107,7 +107,7 @@ class VinChecker extends React.Component{
         <Form.Input placeholder="Color..." type="text" name="color" onChange={this.changeHandler} value={this.state.color}/><br/>
         <br/>
         <Button type="button" name="submit"
-        onClick={() => this.props.addNewCar(this.state.vinInputBox, this.state.year, this.state.make, this.state.model, this.state.color, this.state.selectedCustomer)}>
+        onClick={() => this.props.addNewCar(this.state.vinInputBox, this.state.year, this.state.make, this.state.model, this.state.color, this.state.selectedCustomer, this.state.img)}>
         Submit New Car
         </Button>
       </div>
@@ -125,7 +125,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    addNewCar:(vin, year, make, model, color, customer) => dispatch(addNewCar(vin, year, make, model, color, customer)),
+    addNewCar:(vin, year, make, model, color, customer, img) => dispatch(addNewCar(vin, year, make, model, color, customer, img)),
     resetShowRedirect: () => dispatch({type:"RESET_SHOW_REDIRECT", payload: null})
   }
 }

@@ -10,7 +10,8 @@ class NewCustomer extends React.Component{
   state = {
     name: "",
     address: "",
-    dob: ""
+    dob: "",
+    img:""
   }
 
   componentDidUpdate(){
@@ -45,8 +46,9 @@ class NewCustomer extends React.Component{
           <Form.Input placeholder="Name..." type="text" name="name" value={this.state.name} onChange={this.changeHandler}/><br/>
           <Form.Input placeholder="Address..." type="text" name="address" value={this.state.address} onChange={this.changeHandler}/><br/>
           <Form.Input placeholder="Date of Birth..." type="text" name="dob" value={this.state.dob} onChange={this.changeHandler}/><br/>
+          <Form.Input placeholder="Image Link..." type="text" name="img" value={this.state.img} onChange={this.changeHandler}/><br/>
           <Button className="selectedsort" type="button" name="submit" value="Create Customer Profile"
-          onClick={() => this.props.addNewCustomer(this.state.name, this.state.address, this.state.dob)}>
+          onClick={() => this.props.addNewCustomer(this.state.name, this.state.address, this.state.dob, this.state.img)}>
           Submit
           </Button>
         </div>
@@ -57,7 +59,7 @@ class NewCustomer extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    addNewCustomer: (name, address, dob) => dispatch(addNewCustomer(name, address, dob)),
+    addNewCustomer: (name, address, dob, img) => dispatch(addNewCustomer(name, address, dob, img)),
     resetShowRedirect: () => dispatch({type:"RESET_SHOW_REDIRECT", payload: null})
   }
 }

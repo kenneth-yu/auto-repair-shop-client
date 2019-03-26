@@ -19,7 +19,8 @@ class ShowCustomer extends React.Component{
     year: this.props.car.year,
     make: this.props.car.make,
     model: this.props.car.model,
-    color: this.props.car.color
+    color: this.props.car.color,
+    img: this.props.car.img ? this.props.car.img : ""
   }
 
   changeHandler = (event) => {
@@ -56,7 +57,7 @@ class ShowCustomer extends React.Component{
         <Grid.Row>
         <Grid.Column width={4}>
         <Card centered>
-        <Image src="https://avatarfiles.alphacoders.com/123/123711.jpg"/>
+        <Image src={this.state.img ? this.state.img : "https://www.budget.co.il/en/SVTemplate/img/ltr/car_avatar.png"}/>
         <Card.Content>
         <Card.Description>
         Vin: {this.state.edit ? <Input type="text" name="vin" onChange={this.changeHandler} value={this.state.vin}/> : this.props.car.vin}<br/>
@@ -64,9 +65,10 @@ class ShowCustomer extends React.Component{
         Make: {this.state.edit ? <Input type="text" name="make" onChange={this.changeHandler} value={this.state.make}/> :this.props.car.make}<br/>
         Model: {this.state.edit ? <Input type="text" name="model" onChange={this.changeHandler} value={this.state.model}/> : this.props.car.model}<br/>
         Color: {this.state.edit ? <Input type="text" name="color" onChange={this.changeHandler} value={this.state.color}/> : this.props.car.color}<br/>
+        {this.state.edit ? <span>Image URL: </span> : null} {this.state.edit ? (<Input type="text" name="img" onChange={this.changeHandler} value={this.state.img}/>) : null}
         </Card.Description>
         {this.state.edit ? <Button type="button" name="submit" onClick={() => {
-          this.props.updateCarDetails(this.props.car.id, this.state.vin, this.state.year, this.state.make, this.state.model, this.state.color)
+          this.props.updateCarDetails(this.props.car.id, this.state.vin, this.state.year, this.state.make, this.state.model, this.state.color, this.state.img)
           this.setState({edit:!this.state.edit})
         }} value="Submit Edit">Submit Edit</Button> : null}
         </Card.Content>
@@ -98,7 +100,7 @@ class ShowCustomer extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCarDetails: (id, vin, year, make, model, color) => dispatch(updateCarDetails(id, vin, year, make, model, color)),
+    updateCarDetails: (id, vin, year, make, model, color, img) => dispatch(updateCarDetails(id, vin, year, make, model, color, img)),
     getCustomers: () => dispatch(getCustomers()),
     getJobs: () => dispatch(getJobs())
   }

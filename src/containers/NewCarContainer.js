@@ -25,7 +25,7 @@ class NewCarContainer extends React.Component{
     return(
       <div>
         <SidebarContainer/>
-        <br/><br/><br/><br/><br/><br/>
+        <br/><br/>
         <VinChecker options={options}/>
       </div>
     )
