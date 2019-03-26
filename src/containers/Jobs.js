@@ -60,7 +60,7 @@ class Jobs extends React.Component{
               <SidebarContainer/>
               <div className="pad-header">
               <span className="header-text">All Jobs</span><br/><br/>
-              <span className="text">Sort By: </span>
+              <span className="text">Search By: </span>
               <Button style={this.state.sortBy === "JOB" ? {background:"#3395FF"} : null}
               type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="JOB">JOB</Button>
               <Button style={this.state.sortBy === "TIME" ? {background:"#3395FF"} : null}

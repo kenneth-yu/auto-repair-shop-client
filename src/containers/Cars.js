@@ -70,7 +70,7 @@ class Cars extends React.Component{
               <div className="pad-header">
               <span className="header-text">All Cars</span>
               </div>
-              <span className="text">Sort By: </span> <Button style={this.state.sortBy === "YEAR" ? {background:"#3395FF"} : null} type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="YEAR">YEAR</Button>
+              <span className="text">Search By: </span> <Button style={this.state.sortBy === "YEAR" ? {background:"#3395FF"} : null} type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="YEAR">YEAR</Button>
               <Button style={this.state.sortBy === "MAKE" ? {background:"#3395FF"} : null} type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MAKE">MAKE</Button>
               <Button style={this.state.sortBy === "MODEL" ? {background:"#3395FF"} : null} type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="MODEL">MODEL</Button>
               <Button style={this.state.sortBy === "COLOR" ? {background:"#3395FF"} : null} type="button" onClick={this.changeHandler} className="sort-btn" name="sortBy" value="COLOR">COLOR</Button>

@@ -8,6 +8,16 @@ import { Redirect } from 'react-router-dom'
 
 
 class Dashboard extends React.Component{
+  state = {
+    sortBy: "TIME"
+  }
+
+  changeSortBy = (event) => {
+    // console.log(event)
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
   render(){
     if (!localStorage.getItem('token')){
@@ -18,9 +28,9 @@ class Dashboard extends React.Component{
         <SidebarContainer/>
         <div className="header-div">
         <span className="header-text">Current Queue</span>
-        <SortButtons/><br/>
+        <SortButtons sortBy={this.state.sortBy} changeHandler={this.changeSortBy} /><br/>
         </div>
-        <QueueContainer/>
+        <QueueContainer sortBy={this.state.sortBy}/>
       </div>
     )
   }
