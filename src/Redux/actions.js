@@ -281,9 +281,8 @@ export function updateJobDetails(id, name, car, quote, status, notes){
 
 export function deleteJobDetails(id){
   let jobDetails = {id:id}
-  console.log(id)
   return (dispatch)=> {
-          return fetch(`https://auto-repair-shop-server.herokuapp.com/api/v1/jobs/${jobDetails.id},`,{
+          return fetch(`https://auto-repair-shop-server.herokuapp.com/api/v1/jobs/${jobDetails.id}`,{
           method:'DELETE',
           headers: {
             'Content-Type': 'application/json',

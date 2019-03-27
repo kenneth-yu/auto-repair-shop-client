@@ -43,7 +43,7 @@ class ShowCustomer extends React.Component{
       <div>
       <SidebarContainer/>
       <div className="show-customer-card" >
-        <Grid centered columns={2}>
+        <Grid stackable centered columns={2}>
           <Grid.Row>
             <Grid.Column width={4}>
             <Card centered>
@@ -56,7 +56,8 @@ class ShowCustomer extends React.Component{
               <Card.Description>
                 Address: {this.state.edit ? <Input type="text" name="address" onChange={this.changeHandler} value={this.state.address}/> : (this.props.customer.address)}<br/>
                 Date of Birth: {this.state.edit ? <Input type="text" name="dob" onChange={this.changeHandler} value={this.state.dob}/> : this.props.customer.dob}<br/>
-                Current Balance: {this.state.edit ? <Input type="text" name="vin" onChange={this.changeHandler} value={this.state.balance}/> : this.props.customer.balance}
+                Current Balance: {this.state.edit ? <Input type="text" name="vin" onChange={this.changeHandler} value={(this.props.customer.balance ? this.props.customer.balance : 0 )}/>
+                : (this.props.customer.balance ? this.props.customer.balance : 0 )}
                 {this.state.edit ? <span>Image URL: </span> : null}{this.state.edit ? (<Input type="text" name="img" onChange={this.changeHandler} value={this.state.img}/>) : null}
               </Card.Description><br/>
           {this.state.edit ?

@@ -22,8 +22,8 @@ class QueueContainer extends React.Component{
       }
     return(
       <div className="queue-card-container">
-      <Grid divided='vertically'>
-        <Grid.Row columns={2}>
+      <Grid stackable divided='vertically'>
+        <Grid.Row  columns={2}>
         {allJobList}
         </Grid.Row>
       </Grid>

@@ -48,7 +48,7 @@ class ShowJob extends React.Component{
       <div>
       <SidebarContainer/>
       <div className="show-customer-card">
-        <Grid centered columns={2}>
+        <Grid stackable centered columns={2}>
           <Grid.Row>
           <Grid.Column width={4}>
         <Card centered>

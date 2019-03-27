@@ -108,7 +108,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .queue-card {
-  /* width: 600px; */
+  /* width: 500px; */
   /* width:65%; */
   flex:1;
   padding: 10px;
@@ -129,12 +129,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .job-desc{
   color:#E2F0FF;
   font-size: 18px;
+  /* font-size:2vh; */
+  /* width:auto;
+  overflow-wrap: break-word; */
   line-height: 1px;
 }
 
 .queue-card-container{
   /* flex-direction: column; */
-  display: flex;
+  /* display: flex; */
+    /* overflow-wrap: break-word; */
   /* align-items: center; */
   margin-left: 20%;
 }
