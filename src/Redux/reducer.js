@@ -90,7 +90,13 @@ export default function reducer(state = initialState, action) {
 
     case "SET_REDIRECT_STATE":
       // console.log(action.payload)
-      return {...state, [action.payload]:true }
+      // console.log(action.payload.clickedSpan)
+      if(action.payload.url !== "/"+action.payload.clickedSpan.toLowerCase()){
+        return {...state, [action.payload.clickedSpan]:true }
+      }
+      else{
+        return state
+      }
 
     case "RESET_SHOW_REDIRECT":
       return {...state, redirect: false, redirectTo: ""}

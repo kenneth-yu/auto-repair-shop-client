@@ -9,13 +9,16 @@ class SidebarContainer extends React.Component {
   }
 
   render () {
+    console.log(this.props.location.pathname)
     let {dashboard, newCustomer, newCar, newJob, searchCustomer, searchCar, searchJob} = this.props
     if (dashboard){
+      // console.log('hi')
       if(this.props.location.pathname !== "/dashboard"){
-          return <Redirect to="/dashboard"/>
+        return <Redirect to="/dashboard"/>
         }
       }
     else if (newCustomer){
+      // console.log('hi')
       if(this.props.location.pathname !== "/newcustomer"){
         return <Redirect to="/newcustomer"/>
       }
@@ -49,13 +52,13 @@ class SidebarContainer extends React.Component {
 
     return (
       <Menu width={'15%'}>
-        <span className="menu-item" id="dashboard"  onClick={(event) => this.props.setRedirectState(event.target.id)}>Dashboard</span>
-        <span className="menu-item" id="newCustomer" onClick={(event) => this.props.setRedirectState(event.target.id)}>Add New Customer</span>
-        <span className="menu-item" id="newCar" onClick={(event) => this.props.setRedirectState(event.target.id)}>Add New Car</span>
-        <span className="menu-item" id="newJob" onClick={(event) => this.props.setRedirectState(event.target.id)}>Add New Job</span>
-        <span className="menu-item" id="searchCustomer" onClick={(event) => this.props.setRedirectState(event.target.id)}>Search Customers</span>
-        <span className="menu-item" id="searchCar" onClick={(event) => this.props.setRedirectState(event.target.id)}>Search Cars</span>
-        <span className="menu-item" id="searchJob" onClick={(event) => this.props.setRedirectState(event.target.id)}>Search Job History</span>
+        <span className="menu-item" id="dashboard"  onClick={(event) => this.props.setRedirectState(event.target.id, this.props.location.pathname)}>Dashboard</span>
+        <span className="menu-item" id="newCustomer" onClick={(event) => this.props.setRedirectState(event.target.id, this.props.location.pathname)}>Add New Customer</span>
+        <span className="menu-item" id="newCar" onClick={(event) => this.props.setRedirectState(event.target.id, this.props.location.pathname)}>Add New Car</span>
+        <span className="menu-item" id="newJob" onClick={(event) => this.props.setRedirectState(event.target.id, this.props.location.pathname)}>Add New Job</span>
+        <span className="menu-item" id="searchCustomer" onClick={(event) => this.props.setRedirectState(event.target.id, this.props.location.pathname)}>Search Customers</span>
+        <span className="menu-item" id="searchCar" onClick={(event) => this.props.setRedirectState(event.target.id, this.props.location.pathname)}>Search Cars</span>
+        <span className="menu-item" id="searchJob" onClick={(event) => this.props.setRedirectState(event.target.id, this.props.location.pathname)}>Search Job History</span>
       </Menu>
     );
   }
@@ -76,7 +79,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) =>{
   return{
     // authenticateUser: (username, password) => dispatch(authenticateUser(username, password))
-    setRedirectState: (clickedSpan) => dispatch({type: "SET_REDIRECT_STATE", payload: clickedSpan}),
+    setRedirectState: (clickedSpan, url) => dispatch({type: "SET_REDIRECT_STATE", payload: {clickedSpan: clickedSpan,url: url}}),
     resetRedirectState: (clickedSpan) => dispatch({type: "RESET_REDIRECT_STATE", payload: clickedSpan})
   }
 }
